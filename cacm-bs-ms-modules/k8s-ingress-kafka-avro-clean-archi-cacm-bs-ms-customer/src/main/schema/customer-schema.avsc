@@ -1,0 +1,68 @@
+{
+  "namespace": "fr.placide.cacmbsmscustomer.domain.avro",
+  "name": "CustomerAvro",
+  "type": "record",
+  "fields": [
+    {
+      "name": "customerId",
+      "type": "string"
+    },
+    {
+      "name": "firstname",
+      "type": "string"
+    },
+    {
+      "name": "lastname",
+      "type": "string"
+    },
+    {
+      "name": "createdAt",
+      "type": "string"
+    },
+    {
+      "name": "risk",
+      "type": "string"
+    },
+    {
+      "name": "status",
+      "type": "string"
+    },
+    {
+      "name": "addressId",
+      "type": "string"
+    },
+    {
+      "name": "address",
+      "type": {
+        "type": "record",
+        "name": "Address",
+        "fields": [
+          {
+            "name": "addressId",
+            "type": "string"
+          },
+          {
+            "name": "num",
+            "type": "int"
+          },
+          {
+            "name": "street",
+            "type": "string"
+          },
+          {
+            "name": "pb",
+            "type": "int"
+          },
+          {
+            "name": "city",
+            "type": "string"
+          },
+          {
+            "name": "country",
+            "type": "string"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+package fr.placide.cacmbsmsaddress.domain;
