@@ -1,0 +1,60 @@
+{
+  "namespace": "fr.placide.cacmerbsmsaccount.domain.avro",
+  "name": "AccountAvro",
+  "type": "record",
+  "fields": [
+    {
+      "name": "accountId",
+      "type": "string"
+    },
+    {
+      "name": "type",
+      "type": "string"
+    },
+    {
+      "name": "balance",
+      "type": "double"
+    },
+    {
+      "name": "overdraft",
+      "type": "double"
+    },
+    {
+      "name": "customerId",
+      "type": "string"
+    },
+    {
+      "name": "customer",
+      "type": {
+        "type": "record",
+        "name": "Customer",
+        "fields": [
+          {
+            "name": "customerId",
+            "type": "string"
+          },
+          {
+            "name": "firstname",
+            "type": "string"
+          },
+          {
+            "name": "lastname",
+            "type": "string"
+          },
+          {
+            "name": "createdAt",
+            "type": "string"
+          },
+          {
+            "name": "risk",
+            "type": "string"
+          },
+          {
+            "name": "status",
+            "type": "string"
+          }
+        ]
+      }
+    }
+  ]
+}

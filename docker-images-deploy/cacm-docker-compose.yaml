@@ -150,16 +150,16 @@ services:
     networks:
       - my-network
   ### utility services
-  k8s-ingress-cacm-ms-config-service:
-    image: placidenduwayo1/k8s-ingress-cacm-ms-config-service:1.0.0
-    container_name: k8s-ingress-cacm-ms-config-service
+  k8s-ingress-cacmer-ms-config-service:
+    image: placidenduwayo1/k8s-ingress-cacmer-ms-config-service:1.0.0
+    container_name: k8s-ingress-cacmer-ms-config-service
     build:
-      context: ../cacm-utils-ms-modules/k8s-ingress-cacm-ms-config-service
+      context: ../cacmer-utils-ms-modules/k8s-ingress-cacmer-ms-config-service
       dockerfile: Dockerfile
     ports:
       - "80:8480"
     healthcheck:
-      test: [ "CMD", "curl", "-I", "http://k8s-ingress-cacm-ms-config-service:8480"]
+      test: [ "CMD", "curl", "-I", "http://k8s-ingress-cacmer-ms-config-service:8480"]
       interval: 15s
       timeout: 10s
       retries: 3
@@ -167,31 +167,33 @@ services:
     networks:
       - my-network
     restart: on-failure
-  k8s-ingress-cacm-gateway-service:
-    image: placidenduwayo1/k8s-ingress-cacm-gateway-service:1.0.0
-    container_name: k8s-ingress-cacm-gateway-service
+
+  k8s-ingress-cacmer-gateway-service:
+    image: placidenduwayo1/k8s-ingress-cacmer-gateway-service:1.0.0
+    container_name: k8s-ingress-cacmer-gateway-service
     build:
-      context: ../cacm-utils-ms-modules/k8s-ingress-cacm-gateway-service
+      context: ../cacmer-utils-ms-modules/k8s-ingress-cacmer-gateway-service
       dockerfile: Dockerfile
     ports:
       - "81:8481"
     depends_on:
-      k8s-ingress-cacm-ms-config-service:
+      k8s-ingress-cacmer-ms-config-service:
         condition: service_healthy
-    restart: on-failure
     networks:
       - my-network
+    restart: on-failure
+
   ### business microservices
-  k8s-ingress-kafka-avro-cacm-bs-ms-address:
-    image: placidenduwayo1/k8s-ingress-kafka-avro-cacm-bs-ms-address:1.0.0
-    container_name: k8s-ingress-kafka-avro-cacm-bs-ms-address
+  k8s-ingress-kafka-avro-cacmer-bs-ms-address:
+    image: placidenduwayo1/k8s-ingress-kafka-avro-cacmer-bs-ms-address:1.0.0
+    container_name: k8s-ingress-kafka-avro-cacmer-bs-ms-address
     build:
-      context: ../cacm-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacm-bs-ms-address
+      context: ../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-address
       dockerfile: Dockerfile
     ports:
       - "8881:8881"
     depends_on:
-      k8s-ingress-cacm-ms-config-service:
+      k8s-ingress-cacmer-ms-config-service:
         condition: service_healthy
       bs-ms-database:
         condition: service_healthy
@@ -206,16 +208,17 @@ services:
     restart: on-failure
     environment:
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka-broker-1:9092,kafka-broker-2:9093,kafka-broker-3:9094
-  k8s-ingress-kafka-avro-cacm-bs-ms-customer:
-    image: placidenduwayo1/k8s-ingress-kafka-avro-cacm-bs-ms-customer:1.0.0
-    container_name: k8s-ingress-kafka-avro-cacm-bs-ms-customer
+
+  k8s-ingress-kafka-avro-cacmer-bs-ms-customer:
+    image: placidenduwayo1/k8s-ingress-kafka-avro-cacmer-bs-ms-customer:1.0.0
+    container_name: k8s-ingress-kafka-avro-cacmer-bs-ms-customer
     build:
-      context: ../cacm-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacm-bs-ms-customer
+      context: ../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-customer
       dockerfile: Dockerfile
     ports:
-      - "82:8882"
+      - "8882:8882"
     depends_on:
-      k8s-ingress-cacm-ms-config-service:
+      k8s-ingress-cacmer-ms-config-service:
         condition: service_healthy
       bs-ms-database:
         condition: service_healthy
@@ -230,6 +233,32 @@ services:
     restart: on-failure
     environment:
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka-broker-1:9092,kafka-broker-2:9093,kafka-broker-3:9094
+
+  k8s-ingress-kafka-avro-cacmer-bs-ms-account:
+    container_name: k8s-ingress-kafka-avro-cacmer-bs-ms-account
+    image: placidenduwayo1/k8s-ingress-kafka-avro-cacmer-bs-ms-account:1.0.0
+    build:
+      context: ../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-account
+      dockerfile: Dockerfile
+    ports:
+      - "8883:8883"
+    networks:
+      - my-network
+    environment:
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka-broker-1:9092,kafka-broker-2:9093,kafka-broker-3:9094
+    depends_on:
+      k8s-ingress-cacmer-ms-config-service:
+        condition: service_healthy
+      bs-ms-database:
+        condition: service_healthy
+      kafka-broker-1:
+        condition: service_healthy
+      kafka-broker-2:
+        condition: service_healthy
+      kafka-broker-3:
+        condition: service_healthy
+    restart: on-failure
+
 networks:
   my-network:
 volumes:

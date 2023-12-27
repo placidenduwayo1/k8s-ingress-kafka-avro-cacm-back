@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: k8s-ingress-kafka-avro-cacmer-bs-ms-account
+  config:
+    activate:
+      on-profile: dev
+  main:
+    banner-mode: off
+  cloud:
+    config:
+      uri: http://k8s-ingress-cacmer-ms-config-service:8480
+  kafka:
+    consumer:
+      properties:
+        specific:
+          avro:
+            reader: true
+welcome: bs-ms-account-api,We wish you a warm welcome to customer api service

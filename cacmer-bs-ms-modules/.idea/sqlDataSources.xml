@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DdlMappings">
+    <mapping uuid="2575e551-294d-42d2-9695-03138846756e" name="bs-ms-database@docker-container Mapping">
+      <data-sources db="b8773613-8777-4750-87e2-b59016cc5e90" />
+    </mapping>
+  </component>
+</project>
