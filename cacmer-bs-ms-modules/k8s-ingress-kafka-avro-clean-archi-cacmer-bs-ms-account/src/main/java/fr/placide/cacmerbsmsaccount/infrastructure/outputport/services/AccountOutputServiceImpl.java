@@ -16,6 +16,9 @@ import fr.placide.cacmerbsmsaccount.infrastructure.outputport.repository.Account
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.support.KafkaHeaders;
+import org.springframework.messaging.handler.annotation.Header;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -32,21 +35,21 @@ public class AccountOutputServiceImpl implements AccountConsumerService, Account
 
     @Override
     @KafkaListener(topics = "account-created",groupId = "account")
-    public Account consumeAccountCreateEvent(AccountAvro avro, String topic) {
+    public Account consumeAccountCreateEvent(@Payload AccountAvro avro, @Header(KafkaHeaders.RECEIVED_TOPIC) String topic) {
         Account account = Mapper.map(avro);
         log.info("account to create:<{}> consumed from topic:<{}>", account, topic);
         return account;
     }
 
     @Override
-    public Account consumeAccountEditEvent(AccountAvro avro, String topic) {
+    public Account consumeAccountEditEvent(@Payload AccountAvro avro, @Header(KafkaHeaders.RECEIVED_TOPIC) String topic) {
         Account account = Mapper.map(avro);
         log.info("account to update:<{}> consumed from topic:<{}>", account, topic);
         return account;
     }
 
     @Override
-    public Account consumeAccountDeleteEvent(AccountAvro avro, String topic) {
+    public Account consumeAccountDeleteEvent(@Payload AccountAvro avro, @Header(KafkaHeaders.RECEIVED_TOPIC) String topic) {
         Account account = Mapper.map(avro);
         log.info("account to delete:<{}> consumed from topic:<{}>", account, topic);
         return account;

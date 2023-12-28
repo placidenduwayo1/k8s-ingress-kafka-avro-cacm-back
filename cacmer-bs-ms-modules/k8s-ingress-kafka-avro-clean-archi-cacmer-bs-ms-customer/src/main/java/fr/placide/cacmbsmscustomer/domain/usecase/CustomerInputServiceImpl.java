@@ -1,6 +1,7 @@
 package fr.placide.cacmbsmscustomer.domain.usecase;
 
 import fr.placide.cacmbsmscustomer.domain.avro.CustomerAvro;
+import fr.placide.cacmbsmscustomer.domain.beans.Account;
 import fr.placide.cacmbsmscustomer.domain.beans.Address;
 import fr.placide.cacmbsmscustomer.domain.beans.Customer;
 import fr.placide.cacmbsmscustomer.domain.exceptions.ExceptionMsg;
@@ -9,6 +10,7 @@ import fr.placide.cacmbsmscustomer.domain.inputport.CustomerInputService;
 import fr.placide.cacmbsmscustomer.domain.inputport.RemoteAddressInputService;
 import fr.placide.cacmbsmscustomer.domain.outputport.CustomerOutputService;
 import fr.placide.cacmbsmscustomer.domain.outputport.CustomerProducerService;
+import fr.placide.cacmbsmscustomer.domain.outputport.RemoteAccountOutputService;
 import fr.placide.cacmbsmscustomer.domain.outputport.RemoteAddressOutputService;
 import fr.placide.cacmbsmscustomer.infrastructure.outputport.mapper.Mapper;
 import fr.placide.cacmbsmscustomer.infrastructure.outputport.models.CustomerDto;
@@ -25,12 +27,16 @@ public class CustomerInputServiceImpl implements CustomerInputService, RemoteAdd
     private final CustomerProducerService customerProducerService;
     private final CustomerOutputService customerOutputService;
     private final RemoteAddressOutputService remoteAddressOutputService;
+    private final RemoteAccountOutputService remoteAccountOutputService;
 
     public CustomerInputServiceImpl(CustomerProducerService customerProducerService,
-                                    CustomerOutputService customerOutputService, RemoteAddressOutputService remoteAddressOutputService) {
+                                    CustomerOutputService customerOutputService,
+                                    RemoteAddressOutputService remoteAddressOutputService,
+                                    RemoteAccountOutputService remoteAccountOutputService) {
         this.customerProducerService = customerProducerService;
         this.customerOutputService = customerOutputService;
         this.remoteAddressOutputService = remoteAddressOutputService;
+        this.remoteAccountOutputService = remoteAccountOutputService;
     }
 
     private void validateCustomerFields(CustomerDto dto) throws CustomerFieldsInvalidException, CustomerRiskInvalidException,
@@ -125,7 +131,12 @@ public class CustomerInputServiceImpl implements CustomerInputService, RemoteAdd
     }
 
     @Override
-    public String deleteCustomer(String customerId) throws CustomerNotFoundException, RemoteAddressApiException {
+    public String deleteCustomer(String customerId) throws CustomerNotFoundException, RemoteAddressApiException,
+            CustomerAssignedAccountException {
+        Account account = remoteAccountOutputService.getRemoteAccountByCustomerId(customerId);
+        if(account!=null){
+            throw new CustomerAssignedAccountException();
+        }
         CustomerAvro produced = customerProducerService.produceKafkaEventDeleteCustomer(Mapper.toAvro(getCustomer(customerId)));
         customerOutputService.delete(Mapper.map(produced));
         return "customer: " + produced + " deleted";
@@ -139,15 +150,8 @@ public class CustomerInputServiceImpl implements CustomerInputService, RemoteAdd
     }
 
     @Override
-    public List<Customer> getCustomersByAddress(String id) throws RemoteAddressApiException {
-        List<Customer> customers = customerOutputService.getCustomersByAddress(id);
-        if(customers.isEmpty()){
-            throw new RemoteAddressApiException(ExceptionMsg.REMOTE_ADDRESS_API.getMsg());
-        }
-        for(Customer customer: customers){
-            setDependency(customer, customer.getAddressId());
-        }
-        return customers;
+    public List<Customer> getCustomersByAddress(String id){
+      return customerOutputService.getCustomersByAddress(id);
     }
 
     @Override
@@ -159,9 +163,9 @@ public class CustomerInputServiceImpl implements CustomerInputService, RemoteAdd
            for(Customer c: subList){
                if(c!=null){
                    setDependency(c, c.getAddressId());
+                   customers.add(c);
                }
            }
-           customers.addAll(subList);
         }
        return customers;
     }

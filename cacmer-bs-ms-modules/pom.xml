@@ -18,6 +18,7 @@
         <module>k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-address</module>
         <module>k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-customer</module>
         <module>k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-account</module>
+        <module>k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement</module>
     </modules>
 
 </project>

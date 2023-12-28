@@ -47,11 +47,12 @@ public class Controller {
         return inputService.updateCustomer(dto, id);
     }
     @DeleteMapping(value = "/customers/id/{id}")
-    public String delete(@PathVariable(name = "id") String id) throws RemoteAddressApiException, CustomerNotFoundException {
+    public String delete(@PathVariable(name = "id") String id) throws RemoteAddressApiException, CustomerNotFoundException,
+            CustomerAssignedAccountException {
         return inputService.deleteCustomer(id);
     }
     @GetMapping(value = "/customers/addresses/id/{id}")
-    public List<Customer> getCustomersByAddress(@PathVariable(name = "id") String id) throws RemoteAddressApiException {
+    public List<Customer> getCustomersByAddress(@PathVariable(name = "id") String id) {
         return inputService.getCustomersByAddress(id);
     }
     @GetMapping(value = "/customers/addresses/city/{city}")

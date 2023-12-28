@@ -1,8 +1,10 @@
 package fr.placide.cacmbsmscustomer.infrastructure.outputport.mapper;
 
 import fr.placide.cacmbsmscustomer.domain.avro.CustomerAvro;
+import fr.placide.cacmbsmscustomer.domain.beans.Account;
 import fr.placide.cacmbsmscustomer.domain.beans.Address;
 import fr.placide.cacmbsmscustomer.domain.beans.Customer;
+import fr.placide.cacmbsmscustomer.infrastructure.inputport.feignclients.models.AccountModel;
 import fr.placide.cacmbsmscustomer.infrastructure.inputport.feignclients.models.AddressModel;
 import fr.placide.cacmbsmscustomer.infrastructure.outputport.models.CustomerDto;
 import org.springframework.beans.BeanUtils;
@@ -75,5 +77,10 @@ public class Mapper {
                 .addressId(avro.getAddressId())
                 .address(address)
                 .build();
+    }
+    public static Account map(AccountModel model){
+        Account bean = Account.builder().build();
+        BeanUtils.copyProperties(model,bean);
+        return bean;
     }
 }

@@ -1,14 +1,18 @@
 package fr.placide.cacmbsmscustomer.infrastructure.outputport.services;
 
 import fr.placide.cacmbsmscustomer.domain.avro.CustomerAvro;
+import fr.placide.cacmbsmscustomer.domain.beans.Account;
 import fr.placide.cacmbsmscustomer.domain.beans.Address;
 import fr.placide.cacmbsmscustomer.domain.beans.Customer;
 import fr.placide.cacmbsmscustomer.domain.exceptions.business_exc.CustomerNotFoundException;
 import fr.placide.cacmbsmscustomer.domain.exceptions.business_exc.RemoteAddressApiException;
 import fr.placide.cacmbsmscustomer.domain.outputport.CustomerConsumerService;
 import fr.placide.cacmbsmscustomer.domain.outputport.CustomerOutputService;
+import fr.placide.cacmbsmscustomer.domain.outputport.RemoteAccountOutputService;
 import fr.placide.cacmbsmscustomer.domain.outputport.RemoteAddressOutputService;
+import fr.placide.cacmbsmscustomer.infrastructure.inputport.feignclients.models.AccountModel;
 import fr.placide.cacmbsmscustomer.infrastructure.inputport.feignclients.models.AddressModel;
+import fr.placide.cacmbsmscustomer.infrastructure.inputport.feignclients.proxies.AccountServiceProxy;
 import fr.placide.cacmbsmscustomer.infrastructure.inputport.feignclients.proxies.AddressServiceProxy;
 import fr.placide.cacmbsmscustomer.infrastructure.outputport.mapper.Mapper;
 import fr.placide.cacmbsmscustomer.infrastructure.outputport.models.CustomerModel;
@@ -25,13 +29,18 @@ import java.util.List;
 
 @Service
 @Slf4j
-public class CustomerOutputServiceImpl implements CustomerOutputService, RemoteAddressOutputService, CustomerConsumerService {
+public class CustomerOutputServiceImpl implements CustomerOutputService, RemoteAddressOutputService, CustomerConsumerService,
+        RemoteAccountOutputService {
     private final CustomerRepo customerRepo;
     private final AddressServiceProxy addressServiceProxy;
+    private final AccountServiceProxy accountServiceProxy;
 
-    public CustomerOutputServiceImpl(CustomerRepo customerRepo, @Qualifier(value = "addressserviceproxy") AddressServiceProxy addressServiceProxy) {
+    public CustomerOutputServiceImpl(CustomerRepo customerRepo,
+                                     @Qualifier(value = "addressserviceproxy") AddressServiceProxy addressServiceProxy,
+                                     @Qualifier(value = "accountserviceproxy") AccountServiceProxy accountServiceProxy) {
         this.customerRepo = customerRepo;
         this.addressServiceProxy = addressServiceProxy;
+        this.accountServiceProxy = accountServiceProxy;
     }
 
     @Override
@@ -133,5 +142,15 @@ public class CustomerOutputServiceImpl implements CustomerOutputService, RemoteA
 
     private Customer map(CustomerAvro avro) {
         return Mapper.map(avro);
+    }
+
+    @Override
+    public Account getRemoteAccountByCustomerId(String accountId) {
+       AccountModel model=accountServiceProxy.getRemoteAccountByCustomerId(accountId);
+       Account bean = null;
+       if(model!=null){
+           bean=Mapper.map(model);
+       }
+       return bean;
     }
 }

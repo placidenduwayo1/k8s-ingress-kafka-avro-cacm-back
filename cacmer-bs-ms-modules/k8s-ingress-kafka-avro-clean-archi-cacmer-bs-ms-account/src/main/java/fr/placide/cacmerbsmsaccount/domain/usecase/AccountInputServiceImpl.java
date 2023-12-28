@@ -72,7 +72,15 @@ public class AccountInputServiceImpl implements AccountInputService, RemoteCusto
 
     @Override
     public List<Account> getAllAccounts() {
-        return accountOutputService.getAll();
+        List<Account> accounts = accountOutputService.getAll();
+        accounts.forEach(account -> {
+            try {
+                setDependency(account, account.getCustomerId());
+            } catch (RemoteCustomerApiException e) {
+                e.getMessage();
+            }
+        });
+        return accounts;
     }
 
     @Override
@@ -118,10 +126,10 @@ public class AccountInputServiceImpl implements AccountInputService, RemoteCusto
            Account account = getAccountByCustomer(customer.getCustomerId());
            if(account!=null){
                setDependency(account, account.getCustomerId());
+               accounts.add(account);
            }
-           accounts.add(account);
         }
-        return accounts;
+       return accounts;
     }
 
     @Override

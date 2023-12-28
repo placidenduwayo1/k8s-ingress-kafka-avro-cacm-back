@@ -60,6 +60,7 @@ services:
       interval: 5s
       timeout: 10s
       retries: 10
+    restart: on-failure
 
   kafka-broker-2:
     image: obsidiandynamics/kafka
@@ -85,6 +86,7 @@ services:
       interval: 5s
       timeout: 10s
       retries: 10
+    restart: on-failure
 
   kafka-broker-3:
     image: obsidiandynamics/kafka
@@ -110,6 +112,7 @@ services:
       interval: 5s
       timeout: 10s
       retries: 10
+    restart: on-failure
 
   ### schema registry
   schema-registry-service:
@@ -130,7 +133,7 @@ services:
       SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: kafka-broker-1:9092,kafka-broker-2:9093,kafka-broker-3:9094
     networks:
       - my-network
-    restart: always
+    restart: on-failure
 
   ### kafdrob ui
   kafdrop-ui:
@@ -149,6 +152,8 @@ services:
         condition: service_healthy
     networks:
       - my-network
+    restart: on-failure
+
   ### utility services
   k8s-ingress-cacmer-ms-config-service:
     image: placidenduwayo1/k8s-ingress-cacmer-ms-config-service:1.0.0
@@ -242,6 +247,31 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8883:8883"
+    networks:
+      - my-network
+    environment:
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka-broker-1:9092,kafka-broker-2:9093,kafka-broker-3:9094
+    depends_on:
+      k8s-ingress-cacmer-ms-config-service:
+        condition: service_healthy
+      bs-ms-database:
+        condition: service_healthy
+      kafka-broker-1:
+        condition: service_healthy
+      kafka-broker-2:
+        condition: service_healthy
+      kafka-broker-3:
+        condition: service_healthy
+    restart: on-failure
+
+  k8s-ingress-kafka-avro-cacmer-bs-ms-movement:
+    container_name: k8s-ingress-kafka-avro-cacmer-bs-ms-movement
+    image: placidenduwayo1/k8s-ingress-kafka-avro-cacmer-bs-ms-movement:1.0.0
+    build:
+      context: ../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement
+      dockerfile: Dockerfile
+    ports:
+      - "8884:8884"
     networks:
       - my-network
     environment:

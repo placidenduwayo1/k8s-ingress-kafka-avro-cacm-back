@@ -6,7 +6,8 @@ public enum ExceptionMsg {
     REMOTE_ADDRESS_API("Remote Address Api Exception"),
     FIELDS_INVALID("Customer Fields Invalid Exception"),
     RISK_INVALID("Customer Risk Value Invalid Exception"),
-    STATUS_INVALID("Customer Status Value Invalid Exception");
+    STATUS_INVALID("Customer Status Value Invalid Exception"),
+    CUSTOMER_ASSIGNED_ACCOUNT("Customer Already Assigned Account Exception");
 
     private final String msg;
 
