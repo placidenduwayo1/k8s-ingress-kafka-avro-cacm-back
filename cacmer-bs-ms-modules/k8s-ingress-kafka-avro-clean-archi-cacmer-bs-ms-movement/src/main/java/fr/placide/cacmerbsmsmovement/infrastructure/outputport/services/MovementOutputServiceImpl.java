@@ -103,7 +103,6 @@ public class MovementOutputServiceImpl implements MovementConsumerService, Movem
         }
         return account;
     }
-
     @Override
     public Customer getRemoteCustomerById(String id) {
         CustomerModel model = customerServiceProxy.getRemoteCustomer(id);
