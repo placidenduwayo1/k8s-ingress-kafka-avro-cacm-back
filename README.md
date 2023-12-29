@@ -11,10 +11,10 @@ application base microservices: **addresses**, **customers**, **account**, **mov
 # exposed endpoints by microservices
 
 ## gateway service
-**[GET]**http://localhost:81  
+**[GET]** http://localhost:81  
 all exposed endpoints by business microservices are  through the gateway :**http://localhost:81/endpoints**  
 
-risk-evaluation is a background microservices, it has not endpoint
+**risk-evaluation** is a background microservices, it has not endpoint
 
 ## business microservice address
 **[GET]** http://localhost:81/bs-ms-address  
