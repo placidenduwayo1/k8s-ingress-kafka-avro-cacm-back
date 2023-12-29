@@ -35,7 +35,7 @@ public class Controller {
     @PostMapping(value = "/movements")
     public Movement create(@RequestBody MovementDto dto) throws RemoteSavingAccountCannotUndergoMovementException,
             RemoteAccountBalanceNotEnoughException, MovementFieldsInvalidException, RemoteCustomerApiUnreachable,
-            RemoteAccountApiUnreachableException, MovementSensInvalidException {
+            RemoteAccountApiUnreachableException, MovementSensInvalidException, RemoteCustomerStatusUnauthorizedException {
         return inputService.createMvt(dto);
     }
     @DeleteMapping(value = "/movements/id/{id}")
@@ -44,8 +44,9 @@ public class Controller {
         return inputService.deleteMovement(id);
     }
     @PutMapping(value = "/movements/id/{id}")
-    public Movement update(@RequestBody MovementDto dto, @PathVariable(name = "id")String id) throws RemoteSavingAccountCannotUndergoMovementException, MovementNotFoundException,
-            MovementFieldsInvalidException, RemoteCustomerApiUnreachable, RemoteAccountApiUnreachableException, MovementSensInvalidException {
+    public Movement update(@RequestBody MovementDto dto, @PathVariable(name = "id")String id) throws RemoteSavingAccountCannotUndergoMovementException,
+            MovementNotFoundException, MovementFieldsInvalidException, RemoteCustomerApiUnreachable, RemoteAccountApiUnreachableException,
+            MovementSensInvalidException, RemoteCustomerStatusUnauthorizedException {
         return inputService.updateMovement(dto,id);
     }
 }

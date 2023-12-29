@@ -9,12 +9,12 @@ import java.util.List;
 public interface MovementInputService {
     Movement createMvt(MovementDto dto) throws RemoteAccountApiUnreachableException, RemoteAccountBalanceNotEnoughException,
             RemoteSavingAccountCannotUndergoMovementException, MovementFieldsInvalidException, RemoteCustomerApiUnreachable,
-            MovementSensInvalidException;
+            MovementSensInvalidException, RemoteCustomerStatusUnauthorizedException;
     List<Movement> getAll();
     Movement getMovementById(String mvtId) throws MovementNotFoundException, RemoteCustomerApiUnreachable, RemoteAccountApiUnreachableException;
     Movement updateMovement(MovementDto dto, String mvtId) throws MovementNotFoundException, RemoteAccountApiUnreachableException,
             RemoteSavingAccountCannotUndergoMovementException, MovementFieldsInvalidException, RemoteCustomerApiUnreachable,
-            MovementSensInvalidException;
+            MovementSensInvalidException, RemoteCustomerStatusUnauthorizedException;
     String deleteMovement(String mvtId) throws MovementNotFoundException, RemoteCustomerApiUnreachable, RemoteAccountApiUnreachableException,
             MovementAssignedAccountException;
 

@@ -1,5 +1,8 @@
 package fr.placide.cacmerbsmsmovement.domain.beans;
 
+import lombok.Getter;
+
+@Getter
 public enum Sens {
     BUY("buy"),
     SELL("sell");
@@ -9,7 +12,4 @@ public enum Sens {
         this.mvtSens = mvtSens;
     }
 
-    public String getMvtSens() {
-        return mvtSens;
-    }
 }

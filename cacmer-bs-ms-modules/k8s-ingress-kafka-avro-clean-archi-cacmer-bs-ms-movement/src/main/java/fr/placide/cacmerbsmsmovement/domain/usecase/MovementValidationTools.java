@@ -9,12 +9,11 @@ public class MovementValidationTools {
     public static void format(MovementDto dto){
         dto.setSens(dto.getSens().strip());
         dto.setAccountId(dto.getAccountId().strip());
-        dto.setCustomerId(dto.getCustomerId().strip());
     }
     public static boolean isValidMvt(MovementDto dto){
         return !dto.getSens().isBlank()
                 && !dto.getAccountId().isBlank()
-                && ! dto.getCustomerId().isBlank();
+                && dto.getAmount()>5;
     }
     public static boolean isValidSens(String sens){
         boolean exists = false;

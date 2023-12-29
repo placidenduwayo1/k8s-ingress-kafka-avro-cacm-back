@@ -1,7 +1,6 @@
 package fr.placide.cacmerbsmsmovement.infrastructure.outputport.models;
 
 import fr.placide.cacmerbsmsmovement.domain.beans.Account;
-import fr.placide.cacmerbsmsmovement.domain.beans.Customer;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -20,7 +19,4 @@ public class MovementModel {
     private String accountId;
     @Transient
     private Account account;
-    private String customerId;
-    @Transient
-    private Customer customer;
 }

@@ -34,18 +34,19 @@ public class Mapper {
     }
     public static MovementAvro toAvro(Movement bean){
         fr.placide.cacmerbsmsmovement.domain.avro.Customer customer = fr.placide.cacmerbsmsmovement.domain.avro.Customer.newBuilder()
-                .setCustomerId(bean.getCustomerId())
-                .setFirstname(bean.getCustomer().getFirstname())
-                .setLastname(bean.getCustomer().getLastname())
-                .setCreatedAt(bean.getCustomer().getCreatedAt())
-                .setRisk(bean.getCustomer().getRisk())
-                .setStatus(bean.getCustomer().getStatus())
+                .setCustomerId(bean.getAccount().getCustomerId())
+                .setFirstname(bean.getAccount().getCustomer().getFirstname())
+                .setLastname(bean.getAccount().getCustomer().getLastname())
+                .setCreatedAt(bean.getAccount().getCustomer().getCreatedAt())
+                .setRisk(bean.getAccount().getCustomer().getRisk())
+                .setStatus(bean.getAccount().getCustomer().getStatus())
                 .build();
         fr.placide.cacmerbsmsmovement.domain.avro.Account account = fr.placide.cacmerbsmsmovement.domain.avro.Account.newBuilder()
                 .setAccountId(bean.getAccountId())
                 .setType(bean.getAccount().getType())
                 .setBalance(bean.getAccount().getBalance())
                 .setOverdraft(bean.getAccount().getOverdraft())
+                .setCustomerId(bean.getAccount().getCustomerId())
                 .setCustomer(customer)
                 .build();
 
@@ -54,18 +55,12 @@ public class Mapper {
                 .setSens(bean.getSens())
                 .setAmount(bean.getAmount())
                 .setCreatedAt(bean.getCreatedAt())
+                .setAccountId(bean.getAccountId())
                 .setAccount(account)
                 .build();
     }
 
     public static Movement map(MovementAvro avro){
-        Account account = Account.builder()
-                .accountId(avro.getAccountId())
-                .type(avro.getAccount().getType())
-                .balance(avro.getAccount().getBalance())
-                .overdraft(avro.getAccount().getOverdraft())
-                .customerId(avro.getAccount().getCustomerId())
-                .build();
         Customer customer = Customer.builder()
                 .customerId(avro.getAccount().getCustomerId())
                 .firstname(avro.getAccount().getCustomer().getFirstname())
@@ -74,14 +69,22 @@ public class Mapper {
                 .risk(avro.getAccount().getCustomer().getRisk())
                 .status(avro.getAccount().getCustomer().getStatus())
                 .build();
+        Account account = Account.builder()
+                .accountId(avro.getAccountId())
+                .type(avro.getAccount().getType())
+                .balance(avro.getAccount().getBalance())
+                .overdraft(avro.getAccount().getOverdraft())
+                .customerId(avro.getAccount().getCustomerId())
+                .customer(customer)
+                .build();
 
        return new Movement.MovementBuilder()
                .mvtId(avro.getMvtId())
                .sens(avro.getSens())
                .amount(avro.getAmount())
                .createdAt(avro.getCreatedAt())
+               .accountId(account.getAccountId())
                .account(account)
-               .customer(customer)
                .build();
 
     }

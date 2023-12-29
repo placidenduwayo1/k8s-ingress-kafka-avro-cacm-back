@@ -13,4 +13,5 @@ public class AccountModel {
     private double balance;
     private double overdraft;
     private String customerId;
+    private CustomerModel customerModel;
 }

@@ -26,8 +26,8 @@
     {
       "name": "account",
       "type": {
-        "name": "Account",
         "type": "record",
+        "name": "Account",
         "fields": [
           {
             "name": "accountId",

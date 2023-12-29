@@ -4,75 +4,33 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="33359a32-e4f5-407d-ad38-77c9376dcc5d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-account/src/main/java/fr/placide/cacmerbsmsaccount/infrastructure/config/KafkaTopics.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-customer/src/main/java/fr/placide/cacmbsmscustomer/domain/exceptions/business_exc/RemoteAccountApiException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/domain/exceptions/business_exc/MovementAssignedAccountException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/domain/exceptions/business_exc/MovementFieldsInvalidException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/domain/exceptions/business_exc/MovementNotFoundException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/domain/exceptions/business_exc/MovementSensInvalidException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/domain/exceptions/business_exc/RemoteAccountApiUnreachableException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/domain/exceptions/business_exc/RemoteAccountBalanceNotEnoughException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/domain/exceptions/business_exc/RemoteCustomerApiUnreachable.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/domain/exceptions/business_exc/RemoteSavingAccountCannotUndergoMovementException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/domain/inputport/MovementInputService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/domain/outputport/MovementConsumerService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/domain/outputport/MovementOutputService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/domain/outputport/MovementProducerService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/domain/outputport/RemoteAccountService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/domain/outputport/RemoteCustomerService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/domain/usecase/MovementInputServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/domain/usecase/MovementValidationTools.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/infrastructure/config/KafkaTopics.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/infrastructure/config/MvtUseCaseConf.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/infrastructure/inputport/feignclients/fallbacks/AccountFallback.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/infrastructure/inputport/feignclients/fallbacks/CustomerFallback.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/infrastructure/inputport/feignclients/models/AccountModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/infrastructure/inputport/feignclients/models/CustomerModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/infrastructure/inputport/feignclients/proxies/AccountServiceProxy.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/infrastructure/inputport/feignclients/proxies/CustomerServiceProxy.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/infrastructure/outputport/mapper/Mapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/infrastructure/outputport/models/MovementDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/infrastructure/outputport/models/MovementModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/infrastructure/outputport/repository/MovementRepo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/infrastructure/outputport/services/MovementOutputServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/infrastructure/outputport/services/MovementProducerServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cacmer-bs-ms-modules/.idea/sonarlint/issuestore/0/b/0b7286bb03c61354525b73c6a0b2234331d27478" beforeDir="false" afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/.idea/sonarlint/issuestore/0/b/0b7286bb03c61354525b73c6a0b2234331d27478" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cacmer-bs-ms-modules/.idea/sonarlint/issuestore/e/b/ebb1fb0b6a2925d681d850e0566fd9bbcf8de36f" beforeDir="false" />
+    <list default="true" id="70dc675c-105e-4a8f-b504-2393b46cbb7d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/K8sIngressKafkaAvroCleanArchiCacmerBsMsMovementApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/domain/avro/Account.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/domain/avro/Customer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/domain/avro/MovementAvro.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/domain/exceptions/business_exc/RemoteCustomerStatusUnauthorizedException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/test/java/fr/placide/cacmerbsmsmovement/K8sIngressKafkaAvroCleanArchiCacmerBsMsMovementApplicationTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../cacmer-bs-ms-modules/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cacmer-bs-ms-modules/.idea/sonarlint/securityhotspotstore/e/b/ebb1fb0b6a2925d681d850e0566fd9bbcf8de36f" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../cacmer-bs-ms-modules/.idea/sonarlint/securityhotspotstore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/.idea/sonarlint/securityhotspotstore/index.pb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-account/src/main/java/fr/placide/cacmerbsmsaccount/domain/exceptions/ExceptionMsg.java" beforeDir="false" afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-account/src/main/java/fr/placide/cacmerbsmsaccount/domain/exceptions/ExceptionMsg.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-account/src/main/java/fr/placide/cacmerbsmsaccount/domain/exceptions/business_exc/AccountAlreadyExistsException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-account/src/main/java/fr/placide/cacmerbsmsaccount/domain/inputport/AccountInputService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-account/src/main/java/fr/placide/cacmerbsmsaccount/domain/inputport/AccountInputService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-account/src/main/java/fr/placide/cacmerbsmsaccount/domain/outputport/AccountOutputService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-account/src/main/java/fr/placide/cacmerbsmsaccount/domain/outputport/AccountOutputService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-account/src/main/java/fr/placide/cacmerbsmsaccount/domain/usecase/AccountInputServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-account/src/main/java/fr/placide/cacmerbsmsaccount/domain/usecase/AccountInputServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-account/src/main/java/fr/placide/cacmerbsmsaccount/domain/usecase/AccountValidationTools.java" beforeDir="false" afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-account/src/main/java/fr/placide/cacmerbsmsaccount/domain/usecase/AccountValidationTools.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-account/src/main/java/fr/placide/cacmerbsmsaccount/infrastructure/inputport/exceptions_handler/BusinessExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-account/src/main/java/fr/placide/cacmerbsmsaccount/infrastructure/inputport/exceptions_handler/BusinessExceptionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-account/src/main/java/fr/placide/cacmerbsmsaccount/infrastructure/inputport/web/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-account/src/main/java/fr/placide/cacmerbsmsaccount/infrastructure/inputport/web/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-account/src/main/java/fr/placide/cacmerbsmsaccount/infrastructure/outputport/repository/AccountRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-account/src/main/java/fr/placide/cacmerbsmsaccount/infrastructure/outputport/repository/AccountRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-account/src/main/java/fr/placide/cacmerbsmsaccount/infrastructure/outputport/services/AccountOutputServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-account/src/main/java/fr/placide/cacmerbsmsaccount/infrastructure/outputport/services/AccountOutputServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-address/src/main/java/fr/placide/cacmbsmsaddress/domain/usecase/AddressInputServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-address/src/main/java/fr/placide/cacmbsmsaddress/domain/usecase/AddressInputServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-customer/src/main/java/fr/placide/cacmbsmscustomer/domain/beans/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-customer/src/main/java/fr/placide/cacmbsmscustomer/domain/beans/Account.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-customer/src/main/java/fr/placide/cacmbsmscustomer/domain/exceptions/ExceptionMsg.java" beforeDir="false" afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-customer/src/main/java/fr/placide/cacmbsmscustomer/domain/exceptions/ExceptionMsg.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-customer/src/main/java/fr/placide/cacmbsmscustomer/domain/exceptions/business_exc/RemoteAddressApiException.java" beforeDir="false" afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-customer/src/main/java/fr/placide/cacmbsmscustomer/domain/exceptions/business_exc/RemoteAddressApiException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-customer/src/main/java/fr/placide/cacmbsmscustomer/domain/inputport/CustomerInputService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-customer/src/main/java/fr/placide/cacmbsmscustomer/domain/inputport/CustomerInputService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-customer/src/main/java/fr/placide/cacmbsmscustomer/domain/outputport/RemoteAccountOutputService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-customer/src/main/java/fr/placide/cacmbsmscustomer/domain/outputport/RemoteAccountOutputService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-customer/src/main/java/fr/placide/cacmbsmscustomer/domain/outputport/RemoteAddressOutputService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-customer/src/main/java/fr/placide/cacmbsmscustomer/domain/outputport/RemoteAddressOutputService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-customer/src/main/java/fr/placide/cacmbsmscustomer/domain/usecase/CustomerInputServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-customer/src/main/java/fr/placide/cacmbsmscustomer/domain/usecase/CustomerInputServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-customer/src/main/java/fr/placide/cacmbsmscustomer/infrastructure/inputport/exceptions_handler/BusinessExceptionsHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-customer/src/main/java/fr/placide/cacmbsmscustomer/infrastructure/inputport/exceptions_handler/BusinessExceptionsHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-customer/src/main/java/fr/placide/cacmbsmscustomer/infrastructure/inputport/feignclients/fallbacks/AccountFallback.java" beforeDir="false" afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-customer/src/main/java/fr/placide/cacmbsmscustomer/infrastructure/inputport/feignclients/fallbacks/AccountFallback.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-customer/src/main/java/fr/placide/cacmbsmscustomer/infrastructure/inputport/feignclients/models/AccountModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-customer/src/main/java/fr/placide/cacmbsmscustomer/infrastructure/inputport/feignclients/models/AccountModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-customer/src/main/java/fr/placide/cacmbsmscustomer/infrastructure/inputport/feignclients/proxies/AccountServiceProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-customer/src/main/java/fr/placide/cacmbsmscustomer/infrastructure/inputport/feignclients/proxies/AccountServiceProxy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-customer/src/main/java/fr/placide/cacmbsmscustomer/infrastructure/inputport/feignclients/proxies/AddressServiceProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-customer/src/main/java/fr/placide/cacmbsmscustomer/infrastructure/inputport/feignclients/proxies/AddressServiceProxy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-customer/src/main/java/fr/placide/cacmbsmscustomer/infrastructure/inputport/web/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-customer/src/main/java/fr/placide/cacmbsmscustomer/infrastructure/inputport/web/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-customer/src/main/java/fr/placide/cacmbsmscustomer/infrastructure/outputport/services/CustomerOutputServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-customer/src/main/java/fr/placide/cacmbsmscustomer/infrastructure/outputport/services/CustomerOutputServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/domain/beans/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/domain/beans/Account.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/domain/beans/Movement.java" beforeDir="false" afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/domain/beans/Movement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/domain/exceptions/ExceptionMsg.java" beforeDir="false" afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/domain/exceptions/ExceptionMsg.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/infrastructure/inputport/exceptions_handler/BusinessExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/infrastructure/inputport/exceptions_handler/BusinessExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/domain/beans/Sens.java" beforeDir="false" afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/domain/beans/Sens.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/domain/inputport/MovementInputService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/domain/inputport/MovementInputService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/domain/usecase/MovementInputServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/domain/usecase/MovementInputServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/domain/usecase/MovementValidationTools.java" beforeDir="false" afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/domain/usecase/MovementValidationTools.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/infrastructure/inputport/feignclients/models/AccountModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/infrastructure/inputport/feignclients/models/AccountModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/infrastructure/inputport/web/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/infrastructure/inputport/web/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/infrastructure/outputport/mapper/Mapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/infrastructure/outputport/mapper/Mapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/infrastructure/outputport/models/MovementDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/infrastructure/outputport/models/MovementDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/infrastructure/outputport/models/MovementModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/infrastructure/outputport/models/MovementModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/schema/movement-schema.avsc" beforeDir="false" afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/schema/movement-schema.avsc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/docker-images-deploy.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/3/b3d9b6833153d84f9e88f32a0606989efd7ba1c8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/b/3/b3d9b6833153d84f9e88f32a0606989efd7ba1c8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -83,66 +41,38 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 1
-}</component>
-  <component name="ProjectId" id="2Zocz2n6UNTK3x244q33ceRADaT" />
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 1
+}]]></component>
+  <component name="ProjectId" id="2aDXt96OFONsB4VJt0jhyU3SFNo" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
+    <option name="showVisibilityIcons" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/pn-zbook-g3/workspace/devops/cacm-back-9-k8s-ingress-kafka-avro-ci-cd/cacmer-bs-ms-modules/pom.xml&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="33359a32-e4f5-407d-ad38-77c9376dcc5d" name="Changes" comment="" />
-      <created>1703092131837</created>
+      <changelist id="70dc675c-105e-4a8f-b504-2393b46cbb7d" name="Changes" comment="" />
+      <created>1703854341950</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1703092131837</updated>
-      <workItem from="1703092132926" duration="142000" />
-      <workItem from="1703092319508" duration="10000" />
-      <workItem from="1703144412701" duration="289000" />
-      <workItem from="1703146238882" duration="82000" />
-      <workItem from="1703146935057" duration="7488000" />
-      <workItem from="1703232203751" duration="643000" />
-      <workItem from="1703233682834" duration="668000" />
-      <workItem from="1703236646726" duration="1423000" />
-      <workItem from="1703240420275" duration="2805000" />
-      <workItem from="1703250912607" duration="1922000" />
-      <workItem from="1703253137183" duration="2291000" />
-      <workItem from="1703322548398" duration="77000" />
-      <workItem from="1703347436784" duration="605000" />
-      <workItem from="1703519833547" duration="1588000" />
-      <workItem from="1703531953345" duration="1540000" />
-      <workItem from="1703581601891" duration="2628000" />
-      <workItem from="1703597635488" duration="345000" />
-      <workItem from="1703598159888" duration="1113000" />
-      <workItem from="1703599286085" duration="2277000" />
-      <workItem from="1703669415253" duration="1815000" />
-      <workItem from="1703686638681" duration="1456000" />
-      <workItem from="1703711354342" duration="1952000" />
-      <workItem from="1703754555827" duration="599000" />
-      <workItem from="1703772290270" duration="1201000" />
-      <workItem from="1703845932345" duration="591000" />
-      <workItem from="1703846540237" duration="659000" />
+      <updated>1703854341950</updated>
+      <workItem from="1703854343736" duration="599000" />
     </task>
     <servers />
   </component>

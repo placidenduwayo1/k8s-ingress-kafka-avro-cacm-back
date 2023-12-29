@@ -7,8 +7,6 @@ public class Movement {
     private String createdAt;
     private String accountId;
     private Account account;
-    private String customerId;
-    private Customer customer;
     private Movement(MovementBuilder builder){
         this.mvtId = builder.mvtId;
         this.sens = builder.sens;
@@ -16,8 +14,6 @@ public class Movement {
         this.createdAt = builder.createdAt;
         this.accountId= builder.accountId;
         this.account = builder.account;
-        this.customerId = builder.customerId;
-        this.customer = builder.customer;
     }
 
     public String getMvtId() {
@@ -53,33 +49,15 @@ public class Movement {
     public String getAccountId() {
         return accountId;
     }
-
     public void setAccountId(String accountId) {
         this.accountId = accountId;
     }
-
     public Account getAccount() {
         return account;
     }
 
     public void setAccount(Account account) {
         this.account = account;
-    }
-
-    public String getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
     }
 
     @Override
@@ -89,7 +67,6 @@ public class Movement {
                 ", amount:" + amount +
                 ", created at:'" + createdAt + '\'' +
                 ", account:" + account +
-                ", customer:" + customer +
                 ']';
     }
 
@@ -100,8 +77,6 @@ public class Movement {
         private String createdAt;
         private String accountId;
         private Account account;
-        private String customerId;
-        private Customer customer;
 
         public MovementBuilder mvtId(String mvtId) {
             this.mvtId = mvtId;
@@ -122,24 +97,13 @@ public class Movement {
             this.createdAt = createdAt;
             return this;
         }
-
-        public MovementBuilder accountId(String accountId) {
+        public MovementBuilder accountId(String accountId){
             this.accountId = accountId;
             return this;
         }
 
         public MovementBuilder account(Account account) {
             this.account = account;
-            return this;
-        }
-
-        public MovementBuilder customerId(String customerId) {
-            this.customerId = customerId;
-            return this;
-        }
-
-        public MovementBuilder customer(Customer customer) {
-            this.customer = customer;
             return this;
         }
         public Movement build(){

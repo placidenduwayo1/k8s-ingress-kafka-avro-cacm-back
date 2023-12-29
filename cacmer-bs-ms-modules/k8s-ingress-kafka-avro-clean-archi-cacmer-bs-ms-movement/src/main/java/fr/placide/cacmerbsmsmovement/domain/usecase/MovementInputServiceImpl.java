@@ -33,33 +33,40 @@ public class MovementInputServiceImpl implements MovementInputService {
     }
 
     private void validateMovementFields(MovementDto dto) throws MovementFieldsInvalidException, MovementSensInvalidException,
-            RemoteAccountApiUnreachableException, RemoteSavingAccountCannotUndergoMovementException, RemoteCustomerApiUnreachable {
+            RemoteAccountApiUnreachableException, RemoteSavingAccountCannotUndergoMovementException, RemoteCustomerApiUnreachable,
+            RemoteCustomerStatusUnauthorizedException {
         if (!MovementValidationTools.isValidMvt(dto)) {
             throw new MovementFieldsInvalidException();
         } else if (!MovementValidationTools.isValidSens(dto.getSens())) {
             throw new MovementSensInvalidException();
         }
-        Account account = remoteAccountService.getRemoteAccountById(dto.getAccountId());//check account reachable
-        if (account.getType().equals("saving")) {
+        //check account reachable
+        Account account = remoteAccountService.getRemoteAccountById(dto.getAccountId());
+        if (account == null) {
+            throw new RemoteAccountApiUnreachableException();
+        } else if (account.getType().equals("saving")) {
             throw new RemoteSavingAccountCannotUndergoMovementException(); //check account type
         }
-        Customer customer = remoteCustomerService.getRemoteCustomerById(dto.getCustomerId());///check customer reachable
-        if (!customer.getCustomerId().equals(account.getCustomerId())) {
+        //check customer reachable
+        Customer customer = remoteCustomerService.getRemoteCustomerById(account.getCustomerId());
+        if (customer == null) {
             throw new RemoteCustomerApiUnreachable();
+        } else if (customer.getStatus().equals("archive")) {
+            throw new RemoteCustomerStatusUnauthorizedException();
         }
     }
 
-    private void setDependencies(Movement movement, String accountId, String customerId) throws RemoteAccountApiUnreachableException,
+    private void setDependencies(Movement movement, String accountId) throws RemoteAccountApiUnreachableException,
             RemoteCustomerApiUnreachable {
         Account account = remoteAccountService.getRemoteAccountById(accountId);
-        Customer customer = remoteCustomerService.getRemoteCustomerById(customerId);
+        Customer customer = remoteCustomerService.getRemoteCustomerById(account.getCustomerId());
+        account.setCustomer(customer);
         movement.setAccount(account);
-        movement.setCustomer(customer);
     }
 
     @Override
     public Movement createMvt(MovementDto dto) throws RemoteAccountApiUnreachableException, RemoteSavingAccountCannotUndergoMovementException,
-            MovementFieldsInvalidException, RemoteCustomerApiUnreachable, MovementSensInvalidException {
+            MovementFieldsInvalidException, RemoteCustomerApiUnreachable, MovementSensInvalidException, RemoteCustomerStatusUnauthorizedException {
 
         MovementValidationTools.format(dto);
         validateMovementFields(dto);
@@ -67,7 +74,7 @@ public class MovementInputServiceImpl implements MovementInputService {
         Movement movement = Mapper.map(dto);
         movement.setMvtId(UUID.randomUUID().toString());
         movement.setCreatedAt(Timestamp.from(Instant.now()).toString());
-        setDependencies(movement, dto.getAccountId(), dto.getCustomerId());
+        setDependencies(movement, dto.getAccountId());
 
         MovementAvro avro = Mapper.toAvro(movement);
         MovementAvro produced = producerService.produceKafkaEventCreateMovement(avro);
@@ -81,7 +88,7 @@ public class MovementInputServiceImpl implements MovementInputService {
         if (!movements.isEmpty()) {
             movements.forEach(mvt -> {
                 try {
-                    setDependencies(mvt, mvt.getAccountId(), mvt.getCustomerId());
+                    setDependencies(mvt, mvt.getAccountId());
                 } catch (RemoteAccountApiUnreachableException | RemoteCustomerApiUnreachable e) {
                     e.getMessage();
                 }
@@ -95,7 +102,7 @@ public class MovementInputServiceImpl implements MovementInputService {
             RemoteAccountApiUnreachableException {
         Movement mvt = outputService.getMovementById(mvtId);
         if (mvt != null) {
-            setDependencies(mvt, mvt.getAccountId(), mvt.getCustomerId());
+            setDependencies(mvt, mvt.getAccountId());
         } else {
             throw new MovementNotFoundException();
         }
@@ -104,12 +111,13 @@ public class MovementInputServiceImpl implements MovementInputService {
 
     @Override
     public Movement updateMovement(MovementDto dto, String mvtId) throws MovementNotFoundException, RemoteAccountApiUnreachableException,
-            RemoteSavingAccountCannotUndergoMovementException, MovementFieldsInvalidException, RemoteCustomerApiUnreachable, MovementSensInvalidException {
+            RemoteSavingAccountCannotUndergoMovementException, MovementFieldsInvalidException, RemoteCustomerApiUnreachable, MovementSensInvalidException,
+            RemoteCustomerStatusUnauthorizedException {
         validateMovementFields(dto);
         Movement mvt = getMovementById(mvtId);
         mvt.setSens(dto.getSens());
         mvt.setAmount(dto.getAmount());
-        setDependencies(mvt, mvt.getAccountId(), mvt.getCustomerId());
+        setDependencies(mvt, mvt.getAccountId());
         MovementAvro produced = producerService.produceKafkaEventUpdateMovement(Mapper.toAvro(mvt));
         outputService.updateMovement(Mapper.map(produced));
         return Mapper.map(produced);
