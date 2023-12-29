@@ -83,3 +83,5 @@
 Æk8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/infrastructure/inputport/exceptions_handler/BusinessExceptionHandler.java,e/9/e9035996e7558d053c186ae52be1136e34583a13
 π
 àk8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement/src/main/java/fr/placide/cacmerbsmsmovement/domain/exceptions/ExceptionMsg.java,0/2/02bf9c4b704a96c0e5289e7edfc01a0a61c2f1de
+¿
+èk8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-account/src/main/java/fr/placide/cacmerbsmsaccount/infrastructure/inputport/web/Controller.java,1/6/16f120a99eb9150efe9a117ab169750674c70f25
