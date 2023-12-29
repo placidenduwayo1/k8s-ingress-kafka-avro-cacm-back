@@ -13,7 +13,8 @@ public interface CustomerInputService {
     List<Customer> getCustomerByLastname(String lastname) throws CustomerNotFoundException;
     Customer updateCustomer(CustomerDto dto, String customerId) throws CustomerNotFoundException, RemoteAddressApiException,
             CustomerFieldsInvalidException, CustomerRiskInvalidException, CustomerStatusInvalidException;
-    String deleteCustomer(String customerId) throws CustomerNotFoundException, RemoteAddressApiException, CustomerAssignedAccountException;
+    String deleteCustomer(String customerId) throws CustomerNotFoundException,
+            CustomerAssignedAccountException, RemoteAddressApiException, RemoteAccountApiException;
     Customer getCustomer(String id) throws CustomerNotFoundException, RemoteAddressApiException;
     List<Customer> getCustomersByAddress(String id);
     List<Customer> getCustomersByCity(String city) throws RemoteAddressApiException;

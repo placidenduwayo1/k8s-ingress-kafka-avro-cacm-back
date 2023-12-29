@@ -1,6 +1,5 @@
 package fr.placide.cacmbsmscustomer.infrastructure.inputport.feignclients.proxies;
 
-import fr.placide.cacmbsmscustomer.domain.exceptions.business_exc.RemoteAddressApiException;
 import fr.placide.cacmbsmscustomer.infrastructure.inputport.feignclients.fallbacks.AddressFallback;
 import fr.placide.cacmbsmscustomer.infrastructure.inputport.feignclients.models.AddressModel;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -15,7 +14,7 @@ path = "/bs-ms-address", fallback = AddressFallback.class)
 @Qualifier(value = "addressserviceproxy")
 public interface AddressServiceProxy {
     @GetMapping(value = "/addresses/id/{id}")
-    AddressModel getRemoteAddressById(@PathVariable(name = "id") String id) throws RemoteAddressApiException;
+    AddressModel getRemoteAddressById(@PathVariable(name = "id") String id);
     @GetMapping(value = "/addresses/city/{city}")
-    List<AddressModel> getRemoteAddressesByCity(@PathVariable(name = "city") String city) throws RemoteAddressApiException;
+    List<AddressModel> getRemoteAddressesByCity(@PathVariable(name = "city") String city);
 }

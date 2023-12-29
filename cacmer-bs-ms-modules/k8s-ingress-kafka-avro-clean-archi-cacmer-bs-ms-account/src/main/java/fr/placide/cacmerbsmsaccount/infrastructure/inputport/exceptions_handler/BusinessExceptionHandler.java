@@ -9,11 +9,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
 public class BusinessExceptionHandler {
-    @ExceptionHandler(value = AccountAlreadyExistsException.class )
-    public ResponseEntity<String> handleAccountAlreadyExistsException(){
-        return new ResponseEntity<>(ExceptionMsg.ACCOUNT_EXISTS.getMsg(),
-                HttpStatus.NOT_ACCEPTABLE);
-    }
     @ExceptionHandler(value = AccountFieldsInvalidException.class)
     public ResponseEntity<String> handleAccountFieldsInvalidException(){
         return new ResponseEntity<>(ExceptionMsg.ACCOUNT_FIELDS.getMsg(),

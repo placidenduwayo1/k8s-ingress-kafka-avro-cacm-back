@@ -8,5 +8,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Account {
+    private String accountId;
     private String customerId;
 }

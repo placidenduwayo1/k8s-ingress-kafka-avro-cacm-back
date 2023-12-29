@@ -37,4 +37,8 @@ public class BusinessExceptionsHandler {
     public ResponseEntity<String> handleCustomerAssignedAccountException(){
         return new ResponseEntity<>(ExceptionMsg.CUSTOMER_ASSIGNED_ACCOUNT.getMsg(), HttpStatus.NOT_ACCEPTABLE);
     }
+    @ExceptionHandler(value = RemoteAccountApiException.class)
+    public ResponseEntity<String> handleRemoteAccountApiException(){
+        return new ResponseEntity<>(ExceptionMsg.REMOTE_ACCOUNT_API.getMsg(), HttpStatus.NOT_ACCEPTABLE);
+    }
 }

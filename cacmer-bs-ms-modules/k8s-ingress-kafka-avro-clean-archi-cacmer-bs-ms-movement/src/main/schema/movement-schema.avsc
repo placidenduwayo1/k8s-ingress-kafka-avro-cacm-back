@@ -12,6 +12,14 @@
       "type": "string"
     },
     {
+      "name": "amount",
+      "type": "double"
+    },
+    {
+      "name": "createdAt",
+      "type": "string"
+    },
+    {
       "name": "accountId",
       "type": "string"
     },

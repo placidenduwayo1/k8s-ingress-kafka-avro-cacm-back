@@ -4,7 +4,6 @@ import fr.placide.cacmbsmscustomer.domain.avro.CustomerAvro;
 import fr.placide.cacmbsmscustomer.domain.beans.Account;
 import fr.placide.cacmbsmscustomer.domain.beans.Address;
 import fr.placide.cacmbsmscustomer.domain.beans.Customer;
-import fr.placide.cacmbsmscustomer.domain.exceptions.ExceptionMsg;
 import fr.placide.cacmbsmscustomer.domain.exceptions.business_exc.*;
 import fr.placide.cacmbsmscustomer.domain.inputport.CustomerInputService;
 import fr.placide.cacmbsmscustomer.domain.inputport.RemoteAddressInputService;
@@ -50,7 +49,7 @@ public class CustomerInputServiceImpl implements CustomerInputService, RemoteAdd
         }
         Address address = getRemoteAddressById(dto.getAddressId());
         if (CustomerValidationTools.unreachableRemoteAddress(address.getAddressId())) {
-            throw new RemoteAddressApiException(address.toString());
+            throw new RemoteAddressApiException();
         }
     }
 
@@ -131,13 +130,14 @@ public class CustomerInputServiceImpl implements CustomerInputService, RemoteAdd
     }
 
     @Override
-    public String deleteCustomer(String customerId) throws CustomerNotFoundException, RemoteAddressApiException,
-            CustomerAssignedAccountException {
-        Account account = remoteAccountOutputService.getRemoteAccountByCustomerId(customerId);
-        if(account!=null){
+    public String deleteCustomer(String customerId) throws CustomerNotFoundException,
+            CustomerAssignedAccountException, RemoteAddressApiException, RemoteAccountApiException {
+        Customer customer = getCustomer(customerId);
+        List<Account> accounts = remoteAccountOutputService.getRemoteAccountsByCustomerId(customerId);
+        if(!accounts.isEmpty()){
             throw new CustomerAssignedAccountException();
         }
-        CustomerAvro produced = customerProducerService.produceKafkaEventDeleteCustomer(Mapper.toAvro(getCustomer(customerId)));
+        CustomerAvro produced = customerProducerService.produceKafkaEventDeleteCustomer(Mapper.toAvro(customer));
         customerOutputService.delete(Mapper.map(produced));
         return "customer: " + produced + " deleted";
     }
@@ -172,7 +172,11 @@ public class CustomerInputServiceImpl implements CustomerInputService, RemoteAdd
 
     @Override
     public Address getRemoteAddressById(String addressId) throws RemoteAddressApiException {
-        return remoteAddressOutputService.getRemoteAddressById(addressId);
+        Address address= remoteAddressOutputService.getRemoteAddressById(addressId);
+        if(address==null){
+            throw new RemoteAddressApiException();
+        }
+        return address;
     }
 
     @Override
@@ -180,7 +184,7 @@ public class CustomerInputServiceImpl implements CustomerInputService, RemoteAdd
 
         List<Address> addresses = remoteAddressOutputService.getRemoteAddressesByCity(city);
         if (addresses.isEmpty()) {
-            throw new RemoteAddressApiException(ExceptionMsg.REMOTE_ADDRESS_API.getMsg());
+            throw new RemoteAddressApiException();
         }
         return addresses;
     }

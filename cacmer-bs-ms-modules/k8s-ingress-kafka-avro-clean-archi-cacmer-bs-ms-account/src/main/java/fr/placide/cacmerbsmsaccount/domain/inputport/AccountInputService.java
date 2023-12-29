@@ -7,13 +7,14 @@ import fr.placide.cacmerbsmsaccount.infrastructure.outputport.models.AccountDto;
 import java.util.List;
 
 public interface AccountInputService {
-    Account createAccount(AccountDto dto) throws AccountFieldsInvalidException, RemoteCustomerApiException, AccountTypeInvalidException, RemoteCustomerApiStatusInvalidException, AccountAlreadyExistsException;
+    Account createAccount(AccountDto dto) throws AccountFieldsInvalidException, RemoteCustomerApiException,
+            AccountTypeInvalidException, RemoteCustomerApiStatusInvalidException;
     List<Account> getAllAccounts();
     Account update(AccountDto dto, String accountId) throws AccountNotFoundException, RemoteCustomerApiException,
             AccountFieldsInvalidException, AccountTypeInvalidException, RemoteCustomerApiStatusInvalidException;
     String deleteAccount(String id) throws AccountNotFoundException;
 
     Account getAccountById(String id) throws AccountNotFoundException;
-    Account getAccountByCustomer(String customerId);
+    List<Account> getAccountsByCustomer(String customerId);
     List<Account> getAccountsByCustomersName(String customerLastname) throws RemoteCustomerApiException;
 }

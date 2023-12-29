@@ -7,6 +7,6 @@ import fr.placide.cacmbsmscustomer.domain.exceptions.business_exc.RemoteAddressA
 import java.util.List;
 
 public interface RemoteAddressOutputService {
-    Address getRemoteAddressById(String addressId) throws RemoteAddressApiException;
+    Address getRemoteAddressById(String addressId);
     List<Address> getRemoteAddressesByCity(String city) throws RemoteAddressApiException;
 }

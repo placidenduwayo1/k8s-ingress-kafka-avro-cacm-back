@@ -12,5 +12,5 @@ public interface AccountOutputService {
     Account get(String id) throws AccountNotFoundException;
     void update(Account account);
     void delete(Account account);
-    Account getAccountByCustomer(String customerId);
+    List<Account> getAccountsByCustomer(String customerId);
 }

@@ -86,7 +86,8 @@ public class AddressInputServiceImpl implements AddressInputService {
     }
 
     @Override
-    public String deleteAddress(String addressId) throws AddressNotFoundException, RemoteCustomerAPIException, AddressAssignedCustomerException {
+    public String deleteAddress(String addressId) throws AddressNotFoundException, RemoteCustomerAPIException,
+            AddressAssignedCustomerException {
         Address address = getAddressById(addressId);
         List<Customer> customers = remoteCustomerService.getRemoteCustomersByAddress(addressId);
         if(!customers.isEmpty()){

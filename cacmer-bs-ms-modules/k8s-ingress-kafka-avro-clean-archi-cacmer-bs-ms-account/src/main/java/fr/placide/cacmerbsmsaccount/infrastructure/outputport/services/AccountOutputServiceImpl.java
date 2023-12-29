@@ -87,13 +87,13 @@ public class AccountOutputServiceImpl implements AccountConsumerService, Account
     }
 
     @Override
-    public Account getAccountByCustomer(String customerId){
-        AccountModel model  = accountRepo.findByCustomerId(customerId);
-        Account account = null;
-        if(model!=null){
-            account = map(model);
+    public List<Account> getAccountsByCustomer(String customerId){
+        List<AccountModel> models  = accountRepo.findByCustomerId(customerId);
+        List<Account> accounts = new ArrayList<>();
+        if(!models.isEmpty()){
+            accounts = map(models);
         }
-        return account;
+        return accounts;
     }
 
     @Override

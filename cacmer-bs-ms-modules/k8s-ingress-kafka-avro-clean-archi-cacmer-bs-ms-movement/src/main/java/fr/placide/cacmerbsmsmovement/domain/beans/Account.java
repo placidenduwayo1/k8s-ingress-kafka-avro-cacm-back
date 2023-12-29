@@ -10,4 +10,5 @@ public class Account {
     private String type;
     private double balance;
     private double overdraft;
+    private String customerId;
 }

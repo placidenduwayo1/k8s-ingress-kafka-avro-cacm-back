@@ -1,7 +1,6 @@
 package fr.placide.cacmerbsmsaccount.domain.usecase;
 
 import fr.placide.cacmerbsmsaccount.domain.beans.Type;
-import fr.placide.cacmerbsmsaccount.domain.exceptions.ExceptionMsg;
 import fr.placide.cacmerbsmsaccount.infrastructure.outputport.models.AccountDto;
 
 public class AccountValidationTools {

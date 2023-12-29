@@ -5,12 +5,10 @@ import fr.placide.cacmbsmscustomer.domain.beans.Account;
 import fr.placide.cacmbsmscustomer.domain.beans.Address;
 import fr.placide.cacmbsmscustomer.domain.beans.Customer;
 import fr.placide.cacmbsmscustomer.domain.exceptions.business_exc.CustomerNotFoundException;
-import fr.placide.cacmbsmscustomer.domain.exceptions.business_exc.RemoteAddressApiException;
 import fr.placide.cacmbsmscustomer.domain.outputport.CustomerConsumerService;
 import fr.placide.cacmbsmscustomer.domain.outputport.CustomerOutputService;
 import fr.placide.cacmbsmscustomer.domain.outputport.RemoteAccountOutputService;
 import fr.placide.cacmbsmscustomer.domain.outputport.RemoteAddressOutputService;
-import fr.placide.cacmbsmscustomer.infrastructure.inputport.feignclients.models.AccountModel;
 import fr.placide.cacmbsmscustomer.infrastructure.inputport.feignclients.models.AddressModel;
 import fr.placide.cacmbsmscustomer.infrastructure.inputport.feignclients.proxies.AccountServiceProxy;
 import fr.placide.cacmbsmscustomer.infrastructure.inputport.feignclients.proxies.AddressServiceProxy;
@@ -46,15 +44,14 @@ public class CustomerOutputServiceImpl implements CustomerOutputService, RemoteA
     @Override
     @KafkaListener(topics = "customer-created", groupId = "customer")
     public Customer consumeCustomerCreateEvent(@Payload CustomerAvro avro, @Header(KafkaHeaders.RECEIVED_TOPIC) String topic) {
-        Customer customer = map(avro);
-        log.info("customer to create:<{}> consumed from topic:<{}>", customer, topic);
-        return customer;
+      return map(avro);
     }
 
     @Override
     public void createCustomer(Customer customer) {
         CustomerAvro avro = Mapper.toAvro(customer);
         Customer consumed = consumeCustomerCreateEvent(avro, "customer");
+        log.info("customer to create:<{}> consumed from topic:<{}>", consumed, "customer-created");
         customerRepo.save(Mapper.map(consumed));
     }
 
@@ -71,15 +68,14 @@ public class CustomerOutputServiceImpl implements CustomerOutputService, RemoteA
     @Override
     @KafkaListener(topics = "customer-edited", groupId = "customer")
     public Customer consumeCustomerEditEvent(@Payload CustomerAvro avro, @Header(KafkaHeaders.RECEIVED_TOPIC) String topic) {
-        Customer customer = map(avro);
-        log.info("customer to update:<{}> consumed from topic:<{}>", customer, topic);
-        return customer;
+       return map(avro);
     }
 
     @Override
     public void update(Customer customer) {
         CustomerAvro avro = Mapper.toAvro(customer);
-        Customer consumed = consumeCustomerCreateEvent(avro, "customer-edited");
+        Customer consumed = consumeCustomerEditEvent(avro, "customer-edited");
+        log.info("customer to update:<{}> consumed from topic:<{}>", consumed, "customer-edited");
         customerRepo.save(Mapper.map(consumed));
     }
 
@@ -87,15 +83,14 @@ public class CustomerOutputServiceImpl implements CustomerOutputService, RemoteA
     @Override
     @KafkaListener(topics = "customer-deleted", groupId = "customer")
     public Customer consumeCustomerDeleteEvent(@Payload CustomerAvro avro, @Header(KafkaHeaders.RECEIVED_TOPIC) String topic) {
-        Customer customer = map(avro);
-        log.info("customer to delete:<{}> consumed from topic:<{}>", customer, topic);
-        return customer;
+       return  map(avro);
     }
 
     @Override
     public void delete(Customer customer) {
         CustomerAvro avro = Mapper.toAvro(customer);
         Customer consumed = consumeCustomerDeleteEvent(avro,"customer-deleted");
+        log.info("customer to delete:<{}> consumed from topic:<{}>", consumed, "customer-deleted");
         customerRepo.deleteById(consumed.getCustomerId());
     }
 
@@ -113,14 +108,17 @@ public class CustomerOutputServiceImpl implements CustomerOutputService, RemoteA
     public Customer getCustomer(String id) throws CustomerNotFoundException {
         return map(customerRepo.findById(id).orElseThrow(CustomerNotFoundException::new));
     }
-
     @Override
-    public Address getRemoteAddressById(String addressId) throws RemoteAddressApiException {
-        return map(addressServiceProxy.getRemoteAddressById(addressId));
+    public Address getRemoteAddressById(String addressId) {
+        AddressModel model = addressServiceProxy.getRemoteAddressById(addressId);
+        Address bean = null;
+        if(model!=null){
+            bean = map(model);
+        }
+        return bean;
     }
-
     @Override
-    public List<Address> getRemoteAddressesByCity(String city) throws RemoteAddressApiException {
+    public List<Address> getRemoteAddressesByCity(String city) {
         return addressServiceProxy.getRemoteAddressesByCity(city).stream()
                 .map(Mapper::map)
                 .toList();
@@ -145,12 +143,9 @@ public class CustomerOutputServiceImpl implements CustomerOutputService, RemoteA
     }
 
     @Override
-    public Account getRemoteAccountByCustomerId(String accountId) {
-       AccountModel model=accountServiceProxy.getRemoteAccountByCustomerId(accountId);
-       Account bean = null;
-       if(model!=null){
-           bean=Mapper.map(model);
-       }
-       return bean;
+    public List<Account> getRemoteAccountsByCustomerId(String customerId) {
+        return accountServiceProxy.getRemoteAccountsByCustomerId(customerId).stream()
+                .map(Mapper::map)
+                .toList();
     }
 }

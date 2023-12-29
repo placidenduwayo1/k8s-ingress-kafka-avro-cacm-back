@@ -28,11 +28,11 @@ public class Controller {
         return inputService.getAccountsByCustomersName(customerLastname);
     }
     @GetMapping(value = "/accounts/customers/id/{id}")
-    public Account getAccountByCustomerId(@PathVariable(name = "id") String id){
-        return inputService.getAccountByCustomer(id);
+    public List<Account> getAccountByCustomerId(@PathVariable(name = "id") String id){
+        return inputService.getAccountsByCustomer(id);
     }
     @PostMapping(value = "/accounts")
-    public Account create(@RequestBody AccountDto dto) throws AccountAlreadyExistsException, RemoteCustomerApiStatusInvalidException,
+    public Account create(@RequestBody AccountDto dto)throws RemoteCustomerApiStatusInvalidException,
             AccountTypeInvalidException, RemoteCustomerApiException, AccountFieldsInvalidException {
         return inputService.createAccount(dto);
     }

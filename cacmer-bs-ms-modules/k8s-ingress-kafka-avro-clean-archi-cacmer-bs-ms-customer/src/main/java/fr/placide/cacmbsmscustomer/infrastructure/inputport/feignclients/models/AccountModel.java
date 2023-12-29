@@ -6,5 +6,6 @@ import lombok.Setter;
 
 @Builder @Getter @Setter
 public class AccountModel {
+    private String accountId;
     private String customerId;
 }

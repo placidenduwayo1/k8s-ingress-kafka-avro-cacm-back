@@ -44,23 +44,16 @@ public class AccountInputServiceImpl implements AccountInputService, RemoteCusto
             throw new RemoteCustomerApiStatusInvalidException();
         }
     }
-    private void validateAccountExists(String customerId) throws AccountAlreadyExistsException {
-        Account account = getAccountByCustomer(customerId);
-        if(account!=null){
-            throw new AccountAlreadyExistsException();
-        }
-    }
     private void setDependency(Account account, String customerId) throws RemoteCustomerApiException {
         Customer customer = getRemoteCustomerById(customerId);
         account.setCustomerId(customerId);
         account.setCustomer(customer);
     }
     @Override
-    public Account createAccount(AccountDto dto) throws AccountFieldsInvalidException, RemoteCustomerApiException, AccountTypeInvalidException,
-            RemoteCustomerApiStatusInvalidException, AccountAlreadyExistsException {
+    public Account createAccount(AccountDto dto) throws AccountFieldsInvalidException, RemoteCustomerApiException,
+            AccountTypeInvalidException, RemoteCustomerApiStatusInvalidException {
         AccountValidationTools.format(dto);
         validateAccountFields(dto);
-        validateAccountExists(dto.getCustomerId());
         Account account = Mapper.map(dto);
         account.setAccountId(UUID.randomUUID().toString());
         setDependency(account, dto.getCustomerId());
@@ -114,8 +107,8 @@ public class AccountInputServiceImpl implements AccountInputService, RemoteCusto
     }
 
     @Override
-    public Account getAccountByCustomer(String customerId){
-        return accountOutputService.getAccountByCustomer(customerId);
+    public List<Account> getAccountsByCustomer(String customerId){
+        return accountOutputService.getAccountsByCustomer(customerId);
     }
 
     @Override
@@ -123,10 +116,12 @@ public class AccountInputServiceImpl implements AccountInputService, RemoteCusto
         List<Customer> customers = getRemoteCustomersByName(customerLastname);
         List<Account> accounts = new ArrayList<>();
         for(Customer customer: customers){
-           Account account = getAccountByCustomer(customer.getCustomerId());
-           if(account!=null){
-               setDependency(account, account.getCustomerId());
-               accounts.add(account);
+           List<Account> subList = getAccountsByCustomer(customer.getCustomerId());
+           if(!subList.isEmpty()){
+               for(Account account: subList){
+                   setDependency(account, account.getCustomerId());
+                   accounts.add(account);
+               }
            }
         }
        return accounts;

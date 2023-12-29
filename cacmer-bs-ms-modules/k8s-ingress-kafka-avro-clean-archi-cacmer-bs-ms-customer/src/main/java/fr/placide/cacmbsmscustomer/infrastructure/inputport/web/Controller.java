@@ -48,7 +48,7 @@ public class Controller {
     }
     @DeleteMapping(value = "/customers/id/{id}")
     public String delete(@PathVariable(name = "id") String id) throws RemoteAddressApiException, CustomerNotFoundException,
-            CustomerAssignedAccountException {
+            CustomerAssignedAccountException, RemoteAccountApiException {
         return inputService.deleteCustomer(id);
     }
     @GetMapping(value = "/customers/addresses/id/{id}")

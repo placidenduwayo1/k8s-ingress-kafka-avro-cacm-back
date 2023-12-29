@@ -3,6 +3,8 @@ package fr.placide.cacmerbsmsmovement.domain.beans;
 public class Movement {
     private String mvtId;
     private String sens;
+    private double amount;
+    private String createdAt;
     private String accountId;
     private Account account;
     private String customerId;
@@ -10,6 +12,8 @@ public class Movement {
     private Movement(MovementBuilder builder){
         this.mvtId = builder.mvtId;
         this.sens = builder.sens;
+        this.amount = builder.amount;
+        this.createdAt = builder.createdAt;
         this.accountId= builder.accountId;
         this.account = builder.account;
         this.customerId = builder.customerId;
@@ -30,6 +34,20 @@ public class Movement {
 
     public void setSens(String sens) {
         this.sens = sens;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
     }
 
     public String getAccountId() {
@@ -67,8 +85,9 @@ public class Movement {
     @Override
     public String toString() {
         return "Movement [" +
-                "movement id:'" + mvtId + '\'' +
-                ",movement sens:'" + sens + '\'' +
+                "sens:'" + sens + '\'' +
+                ", amount:" + amount +
+                ", created at:'" + createdAt + '\'' +
                 ", account:" + account +
                 ", customer:" + customer +
                 ']';
@@ -77,6 +96,8 @@ public class Movement {
     public static class MovementBuilder {
         private String mvtId;
         private String sens;
+        private double amount;
+        private String createdAt;
         private String accountId;
         private Account account;
         private String customerId;
@@ -89,6 +110,16 @@ public class Movement {
 
         public MovementBuilder sens(String sens) {
             this.sens = sens;
+            return this;
+        }
+
+        public MovementBuilder amount(double amount) {
+            this.amount = amount;
+            return this;
+        }
+
+        public MovementBuilder createdAt(String createdAt) {
+            this.createdAt = createdAt;
             return this;
         }
 
