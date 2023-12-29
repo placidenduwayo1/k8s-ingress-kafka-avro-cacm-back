@@ -50,8 +50,8 @@ public class Controller {
         return inputService.updateMovement(dto,id);
     }
     @GetMapping(value = "/movements/customers/name/{lastname}")
-    public List<Movement> getOperationsByCustomerName(@PathVariable(name = "lastname") String lastname) throws RemoteCustomerApiUnreachable,
-            MovementNotFoundException {
+    public List<Movement> getOperationsByCustomerName(@PathVariable(name = "lastname") String lastname) throws
+            MovementNotFoundException, RemoteCustomerApiNotFoundException {
         return inputService.getOperationsByCustomerName(lastname);
     }
 }

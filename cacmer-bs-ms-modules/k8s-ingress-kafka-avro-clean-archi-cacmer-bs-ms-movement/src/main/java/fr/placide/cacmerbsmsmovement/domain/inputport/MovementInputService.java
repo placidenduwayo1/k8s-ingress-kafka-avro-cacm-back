@@ -15,7 +15,6 @@ public interface MovementInputService {
     Movement updateMovement(MovementDto dto, String mvtId) throws MovementNotFoundException, RemoteAccountApiUnreachableException,
             RemoteSavingAccountCannotUndergoMovementException, MovementFieldsInvalidException, RemoteCustomerApiUnreachable,
             MovementSensInvalidException, RemoteCustomerStatusUnauthorizedException;
-    String deleteMovement(String mvtId) throws MovementNotFoundException, RemoteCustomerApiUnreachable, RemoteAccountApiUnreachableException,
-            MovementAssignedAccountException;
-    List<Movement> getOperationsByCustomerName(String lastname) throws RemoteCustomerApiUnreachable, MovementNotFoundException, RemoteCustomerApiNotFoundException;
+    String deleteMovement(String mvtId) throws MovementNotFoundException, RemoteCustomerApiUnreachable, RemoteAccountApiUnreachableException, MovementAssignedAccountException;
+    List<Movement> getOperationsByCustomerName(String lastname) throws MovementNotFoundException, RemoteCustomerApiNotFoundException;
 }

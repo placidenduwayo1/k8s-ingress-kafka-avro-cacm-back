@@ -126,8 +126,8 @@ public class MovementInputServiceImpl implements MovementInputService {
     }
 
     @Override
-    public String deleteMovement(String mvtId) throws MovementNotFoundException, RemoteCustomerApiUnreachable, RemoteAccountApiUnreachableException,
-            MovementAssignedAccountException {
+    public String deleteMovement(String mvtId) throws MovementNotFoundException, RemoteCustomerApiUnreachable,
+            RemoteAccountApiUnreachableException, MovementAssignedAccountException {
         Movement mvt = getMovementById(mvtId);
         Account account = remoteAccountService.getRemoteAccountById(mvt.getAccountId());
         if (account != null) {
@@ -156,9 +156,9 @@ public class MovementInputServiceImpl implements MovementInputService {
             if(!accounts.isEmpty()){
                 accounts.forEach(account -> {
                     try {
-                        List<Movement> subMvts = outputService.getMovementsByAccountId(account.getAccountId());
-                        if(!subMvts.isEmpty()){
-                            subMvts.forEach(movement -> {
+                        List<Movement> subMvt = outputService.getMovementsByAccountId(account.getAccountId());
+                        if(!subMvt.isEmpty()){
+                            subMvt.forEach(movement -> {
                                 try {
                                     setDependencies(movement);
                                     movements.add(movement);

@@ -8,5 +8,30 @@ application base microservices: **addresses**, **customers**, **account**, **mov
  - account type **current**
  - current account has **enough balance** or has enough **overdraft** to undergo movement
 
+# exposed endpoints by microservices
+
+risk-evaluation is a background microservices, it has not endpoint
+
+## business microservice address
+[GET] http://localhost:81/bs-ms-address  
+[GET] http://localhost:81/bs-ms-address/addresses  
+[GET] http://localhost:81/bs-ms-address/addresses/id/{value}  
+[POST] http://localhost:81/bs-ms-address/addresses  
+*payload*  
+```
+{
+    "num":int
+    "street":string
+    "pb":int
+    "city":string
+    "country":string
+}
+```
+
+## business microservice customer
+## business microservice account
+## business microservice movement
+
+
 
 
