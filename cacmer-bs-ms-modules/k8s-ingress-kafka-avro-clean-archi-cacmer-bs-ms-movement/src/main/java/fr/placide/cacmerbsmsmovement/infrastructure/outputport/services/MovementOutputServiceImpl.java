@@ -23,6 +23,7 @@ import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -85,6 +86,13 @@ public class MovementOutputServiceImpl implements MovementConsumerService, Movem
     }
 
     @Override
+    public List<Movement> getMovementsByAccountId(String accountId) {
+        return movementRepo.findByAccountId(accountId).stream()
+                .map(Mapper::map)
+                .toList();
+    }
+
+    @Override
     public List<Movement> getAll() {
         return movementRepo.findAll().stream().map(Mapper::map).toList();
     }
@@ -103,6 +111,17 @@ public class MovementOutputServiceImpl implements MovementConsumerService, Movem
         }
         return account;
     }
+
+    @Override
+    public List<Account> getRemoteAccountsByCustomerId(String id) {
+        List<AccountModel> models = accountServiceProxy.getRemoteAccountsByCustomerId(id);
+        List<Account> accounts = new ArrayList<>();
+        if(!models.isEmpty()){
+            accounts = models.stream().map(Mapper::map).toList();
+        }
+        return accounts;
+    }
+
     @Override
     public Customer getRemoteCustomerById(String id) {
         CustomerModel model = customerServiceProxy.getRemoteCustomer(id);
@@ -111,5 +130,15 @@ public class MovementOutputServiceImpl implements MovementConsumerService, Movem
             bean = Mapper.map(model);
         }
         return bean;
+    }
+
+    @Override
+    public List<Customer> getRemoteCustomersByName(String lastname) {
+        List<CustomerModel> models= customerServiceProxy.getRemoteCustomersByName(lastname);
+        List<Customer> beans = new ArrayList<>();
+        if(!models.isEmpty()){
+            beans = models.stream().map(Mapper::map).toList();
+        }
+        return beans;
     }
 }

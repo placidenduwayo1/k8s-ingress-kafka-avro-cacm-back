@@ -11,5 +11,6 @@ public interface MovementOutputService {
     Movement getMovementById(String mvtId) throws MovementNotFoundException;
     void updateMovement(Movement movement);
     void deleteMovement(Movement movement) throws MovementNotFoundException;
+    List<Movement> getMovementsByAccountId(String accountId) throws MovementNotFoundException;
 
 }

@@ -44,9 +44,9 @@ public class AccountInputServiceImpl implements AccountInputService, RemoteCusto
             throw new RemoteCustomerApiStatusInvalidException();
         }
     }
-    private void setDependency(Account account, String customerId) throws RemoteCustomerApiException {
-        Customer customer = getRemoteCustomerById(customerId);
-        account.setCustomerId(customerId);
+    private void setDependency(Account account) throws RemoteCustomerApiException {
+        Customer customer = getRemoteCustomerById(account.getCustomerId());
+        account.setCustomerId(customer.getCustomerId());
         account.setCustomer(customer);
     }
     @Override
@@ -56,7 +56,7 @@ public class AccountInputServiceImpl implements AccountInputService, RemoteCusto
         validateAccountFields(dto);
         Account account = Mapper.map(dto);
         account.setAccountId(UUID.randomUUID().toString());
-        setDependency(account, dto.getCustomerId());
+        setDependency(account);
         AccountAvro avro = Mapper.toAvro(account);
         AccountAvro produced = accountProducerService.produceKafkaEventCreateAccount(avro);
         accountOutputService.create(Mapper.map(produced));
@@ -68,7 +68,7 @@ public class AccountInputServiceImpl implements AccountInputService, RemoteCusto
         List<Account> accounts = accountOutputService.getAll();
         accounts.forEach(account -> {
             try {
-                setDependency(account, account.getCustomerId());
+                setDependency(account);
             } catch (RemoteCustomerApiException e) {
                 e.getMessage();
             }
@@ -85,8 +85,8 @@ public class AccountInputServiceImpl implements AccountInputService, RemoteCusto
        account.setType(dto.getType());
        account.setBalance(dto.getBalance());
        account.setOverdraft(dto.getOverdraft());
-       account.setCustomerId(dto.getCustomerId());
-       setDependency(account,account.getCustomerId());
+       account.setCustomerId(account.getCustomerId());
+       setDependency(account);
        AccountAvro produced = accountProducerService.produceKafkaEventUpdateAccount(Mapper.toAvro(account));
        accountOutputService.update(Mapper.map(produced));
        return Mapper.map(produced);
@@ -119,7 +119,7 @@ public class AccountInputServiceImpl implements AccountInputService, RemoteCusto
            List<Account> subList = getAccountsByCustomer(customer.getCustomerId());
            if(!subList.isEmpty()){
                for(Account account: subList){
-                   setDependency(account, account.getCustomerId());
+                   setDependency(account);
                    accounts.add(account);
                }
            }

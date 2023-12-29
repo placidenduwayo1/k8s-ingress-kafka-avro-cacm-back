@@ -4,11 +4,18 @@ import fr.placide.cacmerbsmsmovement.infrastructure.inputport.feignclients.model
 import fr.placide.cacmerbsmsmovement.infrastructure.inputport.feignclients.proxies.CustomerServiceProxy;
 import org.springframework.stereotype.Service;
 
-@Service
+import java.util.Collections;
+import java.util.List;
 
+@Service
 public class CustomerFallback implements CustomerServiceProxy {
     @Override
     public CustomerModel getRemoteCustomer(String id) {
         return null;
+    }
+
+    @Override
+    public List<CustomerModel> getRemoteCustomersByName(String lastname) {
+        return Collections.emptyList();
     }
 }

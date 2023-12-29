@@ -15,6 +15,7 @@ import fr.placide.cacmerbsmsmovement.infrastructure.outputport.models.MovementDt
 
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -56,9 +57,9 @@ public class MovementInputServiceImpl implements MovementInputService {
         }
     }
 
-    private void setDependencies(Movement movement, String accountId) throws RemoteAccountApiUnreachableException,
+    private void setDependencies(Movement movement) throws RemoteAccountApiUnreachableException,
             RemoteCustomerApiUnreachable {
-        Account account = remoteAccountService.getRemoteAccountById(accountId);
+        Account account = remoteAccountService.getRemoteAccountById(movement.getAccountId());
         Customer customer = remoteCustomerService.getRemoteCustomerById(account.getCustomerId());
         account.setCustomer(customer);
         movement.setAccount(account);
@@ -74,7 +75,7 @@ public class MovementInputServiceImpl implements MovementInputService {
         Movement movement = Mapper.map(dto);
         movement.setMvtId(UUID.randomUUID().toString());
         movement.setCreatedAt(Timestamp.from(Instant.now()).toString());
-        setDependencies(movement, dto.getAccountId());
+        setDependencies(movement);
 
         MovementAvro avro = Mapper.toAvro(movement);
         MovementAvro produced = producerService.produceKafkaEventCreateMovement(avro);
@@ -88,7 +89,7 @@ public class MovementInputServiceImpl implements MovementInputService {
         if (!movements.isEmpty()) {
             movements.forEach(mvt -> {
                 try {
-                    setDependencies(mvt, mvt.getAccountId());
+                    setDependencies(mvt);
                 } catch (RemoteAccountApiUnreachableException | RemoteCustomerApiUnreachable e) {
                     e.getMessage();
                 }
@@ -102,7 +103,7 @@ public class MovementInputServiceImpl implements MovementInputService {
             RemoteAccountApiUnreachableException {
         Movement mvt = outputService.getMovementById(mvtId);
         if (mvt != null) {
-            setDependencies(mvt, mvt.getAccountId());
+            setDependencies(mvt);
         } else {
             throw new MovementNotFoundException();
         }
@@ -113,11 +114,12 @@ public class MovementInputServiceImpl implements MovementInputService {
     public Movement updateMovement(MovementDto dto, String mvtId) throws MovementNotFoundException, RemoteAccountApiUnreachableException,
             RemoteSavingAccountCannotUndergoMovementException, MovementFieldsInvalidException, RemoteCustomerApiUnreachable, MovementSensInvalidException,
             RemoteCustomerStatusUnauthorizedException {
+        MovementValidationTools.format(dto);
         validateMovementFields(dto);
         Movement mvt = getMovementById(mvtId);
         mvt.setSens(dto.getSens());
         mvt.setAmount(dto.getAmount());
-        setDependencies(mvt, mvt.getAccountId());
+        setDependencies(mvt);
         MovementAvro produced = producerService.produceKafkaEventUpdateMovement(Mapper.toAvro(mvt));
         outputService.updateMovement(Mapper.map(produced));
         return Mapper.map(produced);
@@ -136,5 +138,41 @@ public class MovementInputServiceImpl implements MovementInputService {
         outputService.deleteMovement(Mapper.map(avro));
 
         return "movement: " + produced + " deleted";
+    }
+
+    @Override
+    public List<Movement> getOperationsByCustomerName(String lastname) throws  RemoteCustomerApiNotFoundException {
+        List<Customer> customers = remoteCustomerService.getRemoteCustomersByName(lastname);
+        if(customers.isEmpty()){
+            throw new RemoteCustomerApiNotFoundException();
+        }
+        return getMvt(customers);
+    }
+
+    private List<Movement> getMvt(List<Customer> customers) {
+        List<Movement> movements = new ArrayList<>();
+        for(Customer customer: customers){
+            List<Account> accounts = remoteAccountService.getRemoteAccountsByCustomerId(customer.getCustomerId());
+            if(!accounts.isEmpty()){
+                accounts.forEach(account -> {
+                    try {
+                        List<Movement> subMvts = outputService.getMovementsByAccountId(account.getAccountId());
+                        if(!subMvts.isEmpty()){
+                            subMvts.forEach(movement -> {
+                                try {
+                                    setDependencies(movement);
+                                    movements.add(movement);
+                                } catch (RemoteAccountApiUnreachableException | RemoteCustomerApiUnreachable e) {
+                                    e.getMessage();
+                                }
+                            });
+                        }
+                    } catch (MovementNotFoundException e) {
+                        e.getMessage();
+                    }
+                });
+            }
+        }
+        return movements;
     }
 }

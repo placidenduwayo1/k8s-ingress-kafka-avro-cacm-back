@@ -17,5 +17,5 @@ public interface MovementInputService {
             MovementSensInvalidException, RemoteCustomerStatusUnauthorizedException;
     String deleteMovement(String mvtId) throws MovementNotFoundException, RemoteCustomerApiUnreachable, RemoteAccountApiUnreachableException,
             MovementAssignedAccountException;
-
+    List<Movement> getOperationsByCustomerName(String lastname) throws RemoteCustomerApiUnreachable, MovementNotFoundException, RemoteCustomerApiNotFoundException;
 }

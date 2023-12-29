@@ -6,7 +6,7 @@ public enum ExceptionMsg {
     ADDRESS_EXIST ("Address Already Exists Exception"),
     FIELDS_INVALID("Address Fields Invalid Exception"),
     NOT_FOUND("Address Not Found Exception"),
-    REMOTE_CUSTOMER_ERROR("Remote Customer API Unreachable Exception"),
+    REMOTE_CUSTOMER_ERROR("Remote Customer API Unreachable Exception, maybe api is down"),
     ADDRESS_ASSIGNED_CUSTOMER("Address Already Assigned Customer(s) Exception");
     private final String msg;
 

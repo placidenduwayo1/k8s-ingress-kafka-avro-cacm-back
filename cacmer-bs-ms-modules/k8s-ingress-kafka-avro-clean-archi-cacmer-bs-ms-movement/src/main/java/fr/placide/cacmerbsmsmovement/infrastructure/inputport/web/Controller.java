@@ -49,4 +49,9 @@ public class Controller {
             MovementSensInvalidException, RemoteCustomerStatusUnauthorizedException {
         return inputService.updateMovement(dto,id);
     }
+    @GetMapping(value = "/movements/customers/name/{lastname}")
+    public List<Movement> getOperationsByCustomerName(@PathVariable(name = "lastname") String lastname) throws RemoteCustomerApiUnreachable,
+            MovementNotFoundException {
+        return inputService.getOperationsByCustomerName(lastname);
+    }
 }

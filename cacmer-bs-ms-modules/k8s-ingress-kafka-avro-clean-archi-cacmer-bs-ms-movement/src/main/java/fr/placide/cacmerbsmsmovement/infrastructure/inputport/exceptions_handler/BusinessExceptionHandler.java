@@ -37,4 +37,8 @@ public class BusinessExceptionHandler {
     public ResponseEntity<String> handleMovementSensInvalidException(){
         return new ResponseEntity<>(ExceptionMsg.MVT_SENS.getMsg(), HttpStatus.BAD_REQUEST);
     }
+    @ExceptionHandler(value = RemoteCustomerApiNotFoundException.class)
+    public ResponseEntity<String> handleRemoteCustomerApiNotFoundException(){
+        return new ResponseEntity<>(ExceptionMsg.REMOTE_CUSTOMER_NOT_FOUND.getMsg(), HttpStatus.NOT_FOUND);
+    }
 }
