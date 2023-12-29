@@ -10,6 +10,10 @@ application base microservices: **addresses**, **customers**, **account**, **mov
 
 # exposed endpoints by microservices
 
+## gateway service
+**[GET]**http://localhost:81  
+all exposed endpoints by business microservices are  through the gateway :**http://localhost:81/endpoints**  
+
 risk-evaluation is a background microservices, it has not endpoint
 
 ## business microservice address
@@ -49,7 +53,7 @@ risk-evaluation is a background microservices, it has not endpoint
 ## business microservice account
 **[GET]** http://localhost:81/bs-ms-account    
 **[GET]** http://localhost:81/bs-ms-account/accounts  
-**[GET]****[DELETE]** http://localhost:81/bs-ms-account/accounts/id/{id}  
+**[GET]**/**[DELETE]** http://localhost:81/bs-ms-account/accounts/id/{id}  
 **[GET]** http://localhost:81/bs-ms-account/accounts/customers/id/{id}  
 **[GET]** http://localhost:81/bs-ms-account/accounts/customers/name/{lastname}  
 **[POST]**/**[PUT]** http://localhost:81/bs-ms-customer/customers  
