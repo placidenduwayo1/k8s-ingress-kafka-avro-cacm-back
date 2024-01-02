@@ -1,5 +1,5 @@
-package fr.placide.cacmerriskevaluator;
+package fr.placide.cacmerriskevaluator.domain.inputport;
 
 public interface RiskEvaluator {
-    public boolean evaluate(String mvtSens, double mvtAmount, String customerRisk, double balance, double overdraft);
+    double evaluate(String mvtSens, double mvtAmount, String customerRisk, double balance, double overdraft);
 }

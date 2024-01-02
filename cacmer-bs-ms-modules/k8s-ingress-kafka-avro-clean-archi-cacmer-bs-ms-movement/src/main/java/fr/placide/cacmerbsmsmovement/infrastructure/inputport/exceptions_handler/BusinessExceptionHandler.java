@@ -41,4 +41,8 @@ public class BusinessExceptionHandler {
     public ResponseEntity<String> handleRemoteCustomerApiNotFoundException(){
         return new ResponseEntity<>(ExceptionMsg.REMOTE_CUSTOMER_NOT_FOUND.getMsg(), HttpStatus.NOT_FOUND);
     }
+    @ExceptionHandler(value = RemoteAccountBalanceNotEnoughException.class)
+    public ResponseEntity<String> handleRemoteAccountBalanceNotEnoughException(){
+        return new ResponseEntity<>(ExceptionMsg.RISK_EVALUATION.getMsg(), HttpStatus.NOT_ACCEPTABLE);
+    }
 }

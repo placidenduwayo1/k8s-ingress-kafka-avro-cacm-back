@@ -1,11 +1,15 @@
 package fr.placide.cacmerbsmsmovement.infrastructure.inputport.feignclients.proxies;
 
+import fr.placide.cacmerbsmsmovement.domain.beans.Account;
 import fr.placide.cacmerbsmsmovement.infrastructure.inputport.feignclients.fallbacks.AccountFallback;
+import fr.placide.cacmerbsmsmovement.infrastructure.inputport.feignclients.models.AccountDto;
 import fr.placide.cacmerbsmsmovement.infrastructure.inputport.feignclients.models.AccountModel;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -17,4 +21,6 @@ public interface AccountServiceProxy {
     AccountModel getRemoteAccountById(@PathVariable(name = "id") String id);
     @GetMapping(value = "/accounts/customers/id/{id}")
     List<AccountModel> getRemoteAccountsByCustomerId(@PathVariable(name = "id") String id);
+    @PutMapping(value = "/accounts/id/{id}")
+    Account updateAccountAfterOperation(@RequestBody AccountDto accountDto, @PathVariable(name = "id") String id);
 }

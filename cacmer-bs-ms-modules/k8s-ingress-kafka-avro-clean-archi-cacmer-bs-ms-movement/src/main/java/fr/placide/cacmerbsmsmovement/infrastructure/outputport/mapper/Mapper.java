@@ -4,6 +4,7 @@ import fr.placide.cacmerbsmsmovement.domain.avro.MovementAvro;
 import fr.placide.cacmerbsmsmovement.domain.beans.Account;
 import fr.placide.cacmerbsmsmovement.domain.beans.Customer;
 import fr.placide.cacmerbsmsmovement.domain.beans.Movement;
+import fr.placide.cacmerbsmsmovement.infrastructure.inputport.feignclients.models.AccountDto;
 import fr.placide.cacmerbsmsmovement.infrastructure.inputport.feignclients.models.AccountModel;
 import fr.placide.cacmerbsmsmovement.infrastructure.inputport.feignclients.models.CustomerModel;
 import fr.placide.cacmerbsmsmovement.infrastructure.outputport.models.MovementDto;
@@ -93,5 +94,10 @@ public class Mapper {
         MovementModel model = MovementModel.builder().build();
         BeanUtils.copyProperties(bean,model);
         return model;
+    }
+    public static AccountDto map(Account account){
+        AccountDto dto = AccountDto.builder().build();
+        BeanUtils.copyProperties(account, dto);
+        return dto;
     }
 }

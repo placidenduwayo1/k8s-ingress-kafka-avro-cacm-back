@@ -10,6 +10,8 @@ import fr.placide.cacmerbsmsmovement.domain.outputport.MovementOutputService;
 import fr.placide.cacmerbsmsmovement.domain.outputport.MovementProducerService;
 import fr.placide.cacmerbsmsmovement.domain.outputport.RemoteAccountService;
 import fr.placide.cacmerbsmsmovement.domain.outputport.RemoteCustomerService;
+import fr.placide.cacmerbsmsmovement.infrastructure.inputport.feignclients.models.AccountDto;
+import fr.placide.cacmerbsmsmovement.infrastructure.inputport.feignclients.proxies.RiskEvaluatorServiceProxy;
 import fr.placide.cacmerbsmsmovement.infrastructure.outputport.mapper.Mapper;
 import fr.placide.cacmerbsmsmovement.infrastructure.outputport.models.MovementDto;
 
@@ -24,13 +26,15 @@ public class MovementInputServiceImpl implements MovementInputService {
     private final RemoteCustomerService remoteCustomerService;
     private final MovementProducerService producerService;
     private final MovementOutputService outputService;
-
+    private final RiskEvaluatorServiceProxy riskEvaluatorServiceProxy;
     public MovementInputServiceImpl(RemoteAccountService remoteAccountService,
-                                    RemoteCustomerService remoteCustomerService, MovementProducerService producerService, MovementOutputService outputService) {
+                                    RemoteCustomerService remoteCustomerService, MovementProducerService producerService,
+                                    MovementOutputService outputService, RiskEvaluatorServiceProxy riskEvaluatorServiceProxy) {
         this.remoteAccountService = remoteAccountService;
         this.remoteCustomerService = remoteCustomerService;
         this.producerService = producerService;
         this.outputService = outputService;
+        this.riskEvaluatorServiceProxy = riskEvaluatorServiceProxy;
     }
 
     private void validateMovementFields(MovementDto dto) throws MovementFieldsInvalidException, MovementSensInvalidException,
@@ -66,8 +70,9 @@ public class MovementInputServiceImpl implements MovementInputService {
     }
 
     @Override
-    public Movement createMvt(MovementDto dto) throws RemoteAccountApiUnreachableException, RemoteSavingAccountCannotUndergoMovementException,
-            MovementFieldsInvalidException, RemoteCustomerApiUnreachable, MovementSensInvalidException, RemoteCustomerStatusUnauthorizedException {
+    public Movement createMvt(MovementDto dto) throws RemoteAccountApiUnreachableException,
+            RemoteSavingAccountCannotUndergoMovementException, MovementFieldsInvalidException, RemoteCustomerApiUnreachable,
+            MovementSensInvalidException, RemoteCustomerStatusUnauthorizedException, RemoteAccountBalanceNotEnoughException {
 
         MovementValidationTools.format(dto);
         validateMovementFields(dto);
@@ -76,10 +81,20 @@ public class MovementInputServiceImpl implements MovementInputService {
         movement.setMvtId(UUID.randomUUID().toString());
         movement.setCreatedAt(Timestamp.from(Instant.now()).toString());
         setDependencies(movement);
-
+        Account account = remoteAccountService.getRemoteAccountById(dto.getAccountId());
+        Customer customer = remoteCustomerService.getRemoteCustomerById(account.getCustomerId());
+        double balance = riskEvaluatorServiceProxy.getRemoteRiskEvaluatorToEvaluate(
+                movement.getSens(), movement.getAmount(), customer.getRisk(), account.getBalance(),account.getOverdraft());
+        if(balance-50< movement.getAmount()){
+            throw new RemoteAccountBalanceNotEnoughException();
+        }
         MovementAvro avro = Mapper.toAvro(movement);
         MovementAvro produced = producerService.produceKafkaEventCreateMovement(avro);
         outputService.createMvt(Mapper.map(produced));
+        account.setBalance(account.getBalance()- movement.getAmount());
+        AccountDto accountDto = Mapper.map(account);
+       remoteAccountService.updateAccountAfterOperation(accountDto, account.getAccountId());
+
         return Mapper.map(produced);
     }
 

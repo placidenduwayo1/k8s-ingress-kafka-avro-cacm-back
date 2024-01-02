@@ -1,21 +1,19 @@
-package fr.placide.cacmerriskevaluator;
+package fr.placide.cacmerriskevaluator.domain.usecase;
 
-import org.springframework.stereotype.Service;
-
-@Service
-public class RiskEvaluatorImpl implements RiskEvaluator{
+import fr.placide.cacmerriskevaluator.domain.inputport.RiskEvaluator;
+public class RiskEvaluatorImpl implements RiskEvaluator {
     @Override
-    public boolean evaluate(String mvtSens, double mvtAmount, String customerRisk, double balance, double overdraft) {
+    public double evaluate(String mvtSens, double mvtAmount, String customerRisk, double balance, double overdraft) {
         if(mvtSens.equals("sell")){
             balance+=mvtAmount;
         }
         else if (mvtSens.equals("buy")){
             if(customerRisk.equals("low")){
-                balance -= overdraft*1+0.1;
+                balance -= overdraft*1.1;
             } else if (customerRisk.equals("high")) {
                 balance+=overdraft*1.3;
             }
         }
-        return balance-50>=mvtAmount;
+        return balance;
     }
 }

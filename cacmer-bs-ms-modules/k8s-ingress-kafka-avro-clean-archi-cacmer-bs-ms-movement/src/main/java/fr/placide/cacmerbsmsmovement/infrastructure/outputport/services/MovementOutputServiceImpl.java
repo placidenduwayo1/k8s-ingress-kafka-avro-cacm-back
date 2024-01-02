@@ -9,6 +9,7 @@ import fr.placide.cacmerbsmsmovement.domain.outputport.MovementConsumerService;
 import fr.placide.cacmerbsmsmovement.domain.outputport.MovementOutputService;
 import fr.placide.cacmerbsmsmovement.domain.outputport.RemoteAccountService;
 import fr.placide.cacmerbsmsmovement.domain.outputport.RemoteCustomerService;
+import fr.placide.cacmerbsmsmovement.infrastructure.inputport.feignclients.models.AccountDto;
 import fr.placide.cacmerbsmsmovement.infrastructure.inputport.feignclients.models.AccountModel;
 import fr.placide.cacmerbsmsmovement.infrastructure.inputport.feignclients.models.CustomerModel;
 import fr.placide.cacmerbsmsmovement.infrastructure.inputport.feignclients.proxies.AccountServiceProxy;
@@ -120,6 +121,11 @@ public class MovementOutputServiceImpl implements MovementConsumerService, Movem
             accounts = models.stream().map(Mapper::map).toList();
         }
         return accounts;
+    }
+
+    @Override
+    public void updateAccountAfterOperation(AccountDto accountDto, String accountId) {
+        accountServiceProxy.updateAccountAfterOperation(accountDto,accountId);
     }
 
     @Override

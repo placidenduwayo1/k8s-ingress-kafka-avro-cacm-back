@@ -3,10 +3,11 @@ application base microservices: **addresses**, **customers**, **account**, **mov
 ## modeling
 ![CACMER](https://github.com/placidenduwayo1/k8s-ingress-kafka-avro-cacm-back/assets/124048212/306c7a3e-5b8e-4195-8766-e269f2238ffa)
 
-**risk-evaluation-service** is separated microservices. it permits a movement when followin conditions are fulfilled:
- - customer related to account is **active**
- - account type **current**
- - current account has **enough balance** or has enough **overdraft** to undergo movement
+**risk-evaluation-service** is separated microservices. to evaluate a risk, this microservice need:
+ - customer **status** (active / archive) and **risk** (low/high)
+ - account type **current**/**saving**
+ - account **balance**and **overdraft**
+ - movement **amount**
 
 # exposed endpoints by microservices
 
@@ -35,7 +36,7 @@ all exposed endpoints by business microservices are  through the gateway :**http
 **[GET]** http://localhost:81/bs-ms-customer  
 **[GET]** http://localhost:81/bs-ms-customer/customers  
 **[GET]** http://localhost:81/bs-ms-customer/customers/name/{lastname}  
-**[GET]** http://localhost:81/bs-ms-customer/customers/addresses/id/{id}  
+**[GET]** http://localhost:81/bs-ms-customer/customers/addresses/id/{amountid}  
 **[GET]** http://localhost:81/bs-ms-customer/customers/addresses/city/{city}  
 **[GET]**/**[DELETE]** http://localhost:81/bs-ms-customer/customers/id/{id}  
 **[POST]**/**[PUT]** http://localhost:81/bs-ms-customer/customers  
