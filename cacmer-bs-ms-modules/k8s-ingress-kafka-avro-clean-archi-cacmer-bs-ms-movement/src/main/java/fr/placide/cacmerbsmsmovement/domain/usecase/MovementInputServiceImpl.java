@@ -73,7 +73,7 @@ public class MovementInputServiceImpl implements MovementInputService {
     @Override
     public Movement createMvt(MovementDto dto) throws RemoteAccountApiUnreachableException,
             RemoteSavingAccountCannotUndergoMovementException, MovementFieldsInvalidException, RemoteCustomerApiUnreachable,
-            MovementSensInvalidException, RemoteCustomerStatusUnauthorizedException, RemoteAccountBalanceNotEnoughException {
+            MovementSensInvalidException, RemoteCustomerStatusUnauthorizedException, RemoteAccountBalanceNotEnoughException, RemoteRiskEvaluatorServiceUnreachableException {
 
         MovementValidationTools.format(dto);
         validateMovementFields(dto);
@@ -83,10 +83,13 @@ public class MovementInputServiceImpl implements MovementInputService {
         movement.setCreatedAt(Timestamp.from(Instant.now()).toString());
         setDependencies(movement);
         Account account = remoteAccountService.getRemoteAccountById(dto.getAccountId());
-        double balance = riskEvaluatorServiceProxy.getRemoteRiskEvaluatorToEvaluate(account.getAccountId(),
+        double balance = riskEvaluatorServiceProxy.getRemoteRiskEvaluation(account.getAccountId(),
                 movement.getSens(), movement.getAmount());
         log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! {}",balance);
-        if(balance-50< movement.getAmount()){
+        if(balance==-1){
+            throw new RemoteRiskEvaluatorServiceUnreachableException();
+        }
+        if(Math.abs(balance)-50< movement.getAmount()){
             throw new RemoteAccountBalanceNotEnoughException();
         }
         MovementAvro avro = Mapper.toAvro(movement);

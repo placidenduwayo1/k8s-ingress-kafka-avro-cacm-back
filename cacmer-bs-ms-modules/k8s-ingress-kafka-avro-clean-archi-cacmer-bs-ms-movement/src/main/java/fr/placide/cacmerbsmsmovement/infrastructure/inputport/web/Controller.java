@@ -35,7 +35,8 @@ public class Controller {
     @PostMapping(value = "/movements")
     public Movement create(@RequestBody MovementDto dto) throws RemoteSavingAccountCannotUndergoMovementException,
             RemoteAccountBalanceNotEnoughException, MovementFieldsInvalidException, RemoteCustomerApiUnreachable,
-            RemoteAccountApiUnreachableException, MovementSensInvalidException, RemoteCustomerStatusUnauthorizedException {
+            RemoteAccountApiUnreachableException, MovementSensInvalidException, RemoteCustomerStatusUnauthorizedException,
+            RemoteRiskEvaluatorServiceUnreachableException {
         return inputService.createMvt(dto);
     }
     @DeleteMapping(value = "/movements/id/{id}")

@@ -9,10 +9,12 @@ public enum ExceptionMsg {
     RISK_EVALUATION("Remote Account Balance ot Enough to undergo that operation Exception"),
     REMOTE_CUSTOMER_API("Remote Customer API Unreachable Exception"),
     REMOTE_CUSTOMER_NOT_FOUND("Remote Customer API Not Found Exception"),
+    REMOTE_CUSTOMER_STATUS("Remote Customer Status Unauthorized Exception"),
     MVT_FIELDS_INVALID("Movement Fields Invalid Exception"),
     MVT_ASSIGNED_ACCOUNT("Movement Already Assigned Account Exception"),
     MVT_NOT_FOUND("Movement Not Found Exception"),
-    MVT_SENS("Movement Sens Invalid Exception");
+    MVT_SENS("Movement Sens Invalid Exception"),
+    REMOTE_RISK_EVALUATOR("Remote Risk Evaluator Service API Unreachable Exception");
     private final String msg;
 
     ExceptionMsg(String msg) {

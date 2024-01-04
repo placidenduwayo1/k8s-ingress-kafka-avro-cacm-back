@@ -5,15 +5,13 @@ import fr.placide.cacmerbsmsmovement.domain.beans.Account;
 import fr.placide.cacmerbsmsmovement.domain.beans.Customer;
 import fr.placide.cacmerbsmsmovement.domain.beans.Movement;
 import fr.placide.cacmerbsmsmovement.domain.exceptions.business_exc.MovementNotFoundException;
-import fr.placide.cacmerbsmsmovement.domain.outputport.MovementConsumerService;
-import fr.placide.cacmerbsmsmovement.domain.outputport.MovementOutputService;
-import fr.placide.cacmerbsmsmovement.domain.outputport.RemoteAccountService;
-import fr.placide.cacmerbsmsmovement.domain.outputport.RemoteCustomerService;
+import fr.placide.cacmerbsmsmovement.domain.outputport.*;
 import fr.placide.cacmerbsmsmovement.infrastructure.inputport.feignclients.models.AccountDto;
 import fr.placide.cacmerbsmsmovement.infrastructure.inputport.feignclients.models.AccountModel;
 import fr.placide.cacmerbsmsmovement.infrastructure.inputport.feignclients.models.CustomerModel;
 import fr.placide.cacmerbsmsmovement.infrastructure.inputport.feignclients.proxies.AccountServiceProxy;
 import fr.placide.cacmerbsmsmovement.infrastructure.inputport.feignclients.proxies.CustomerServiceProxy;
+import fr.placide.cacmerbsmsmovement.infrastructure.inputport.feignclients.proxies.RiskEvaluatorServiceProxy;
 import fr.placide.cacmerbsmsmovement.infrastructure.outputport.mapper.Mapper;
 import fr.placide.cacmerbsmsmovement.infrastructure.outputport.repository.MovementRepo;
 import lombok.extern.slf4j.Slf4j;
@@ -30,16 +28,19 @@ import java.util.List;
 @Service
 @Slf4j
 public class MovementOutputServiceImpl implements MovementConsumerService, MovementOutputService,
-        RemoteAccountService, RemoteCustomerService {
+        RemoteAccountService, RemoteCustomerService, RemoteRiskEvaluatorService {
     private final AccountServiceProxy accountServiceProxy;
     private final CustomerServiceProxy customerServiceProxy;
+    private final RiskEvaluatorServiceProxy riskEvaluatorServiceProxy;
     private final MovementRepo movementRepo;
 
     public MovementOutputServiceImpl(@Qualifier(value = "accountserviceproxy") AccountServiceProxy accountServiceProxy,
                                      @Qualifier(value = "customerserviceproxy") CustomerServiceProxy customerServiceProxy,
+                                     @Qualifier(value = "riskevaluatorserviceproxy") RiskEvaluatorServiceProxy riskEvaluatorServiceProxy,
                                      MovementRepo movementRepo) {
         this.accountServiceProxy = accountServiceProxy;
         this.customerServiceProxy = customerServiceProxy;
+        this.riskEvaluatorServiceProxy = riskEvaluatorServiceProxy;
         this.movementRepo = movementRepo;
     }
 
@@ -146,5 +147,10 @@ public class MovementOutputServiceImpl implements MovementConsumerService, Movem
             beans = models.stream().map(Mapper::map).toList();
         }
         return beans;
+    }
+
+    @Override
+    public double getRemoteRiskEvaluation(String accountId, String mvtSens, double mvtAmount) {
+        return riskEvaluatorServiceProxy.getRemoteRiskEvaluation(accountId,mvtSens,mvtAmount);
     }
 }

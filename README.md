@@ -33,6 +33,7 @@ all exposed endpoints by business microservices are  through the gateway :**http
     "country":string
 }
 ```
+**note:** all necessary restrictions are applied
 ## business microservice customer
 **[GET]** http://localhost:81/bs-ms-customer  
 **[GET]** http://localhost:81/bs-ms-customer/customers  
@@ -52,6 +53,7 @@ all exposed endpoints by business microservices are  through the gateway :**http
     "address-id":string
 }
 ```
+**note:** all necessary restrictions are applied, remote address service api must be reachable
 ## business microservice account
 **[GET]** http://localhost:81/bs-ms-account    
 **[GET]** http://localhost:81/bs-ms-account/accounts  
@@ -68,6 +70,7 @@ all exposed endpoints by business microservices are  through the gateway :**http
     "customerId":string
 }
 ```
+**note:** all necessary restrictions are applied, remote customer service api must be reachable
 ## business microservice movement
 
 **[GET]** http://localhost:81/bs-ms-mvt  
@@ -83,5 +86,6 @@ all exposed endpoints by business microservices are  through the gateway :**http
     "account-id": string
 }
 ```
+**note:** all necessary restrictions are applied, remote account and customer service apis must be reachable
 
 
