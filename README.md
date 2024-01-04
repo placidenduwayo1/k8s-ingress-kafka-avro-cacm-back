@@ -1,9 +1,10 @@
 # cacmer project
 application base microservices: **addresses**, **customers**, **account**, **movement** and **risk-evaluation**
 ## modeling
-![CACMER](https://github.com/placidenduwayo1/k8s-ingress-kafka-avro-cacm-back/assets/124048212/306c7a3e-5b8e-4195-8766-e269f2238ffa)
+![CACMER](https://github.com/placidenduwayo1/k8s-ingress-kafka-avro-cacmer-back/assets/124048212/99e16818-fac1-4c6b-9bcc-560ac7526361)
 
-**risk-evaluation-service** is separated microservices. to evaluate a risk, this microservice need:
+
+**risk-evaluator** is small separated microservices that evaluates customers and accounts risk against operations, this service need:
  - customer **status** (active / archive) and **risk** (low/high)
  - account type **current**/**saving**
  - account **balance**and **overdraft**
