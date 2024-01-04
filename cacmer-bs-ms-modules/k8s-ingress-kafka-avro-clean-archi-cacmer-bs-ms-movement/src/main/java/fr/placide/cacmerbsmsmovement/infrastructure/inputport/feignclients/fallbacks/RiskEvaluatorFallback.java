@@ -5,9 +5,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class RiskEvaluatorFallback implements RiskEvaluatorServiceProxy {
+
     @Override
-    public double getRemoteRiskEvaluatorToEvaluate(
-            String mvtSens, double mvtAmount, String customerRisk, double accountBalance, double accountOverdraft) {
+    public double getRemoteRiskEvaluatorToEvaluate(String id, String movementSens, double movementAmount) {
         return 0;
     }
 }

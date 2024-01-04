@@ -14,13 +14,14 @@ import fr.placide.cacmerbsmsmovement.infrastructure.inputport.feignclients.model
 import fr.placide.cacmerbsmsmovement.infrastructure.inputport.feignclients.proxies.RiskEvaluatorServiceProxy;
 import fr.placide.cacmerbsmsmovement.infrastructure.outputport.mapper.Mapper;
 import fr.placide.cacmerbsmsmovement.infrastructure.outputport.models.MovementDto;
+import lombok.extern.slf4j.Slf4j;
 
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
+@Slf4j
 public class MovementInputServiceImpl implements MovementInputService {
     private final RemoteAccountService remoteAccountService;
     private final RemoteCustomerService remoteCustomerService;
@@ -82,9 +83,9 @@ public class MovementInputServiceImpl implements MovementInputService {
         movement.setCreatedAt(Timestamp.from(Instant.now()).toString());
         setDependencies(movement);
         Account account = remoteAccountService.getRemoteAccountById(dto.getAccountId());
-        Customer customer = remoteCustomerService.getRemoteCustomerById(account.getCustomerId());
-        double balance = riskEvaluatorServiceProxy.getRemoteRiskEvaluatorToEvaluate(
-                movement.getSens(), movement.getAmount(), customer.getRisk(), account.getBalance(),account.getOverdraft());
+        double balance = riskEvaluatorServiceProxy.getRemoteRiskEvaluatorToEvaluate(account.getAccountId(),
+                movement.getSens(), movement.getAmount());
+        log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! {}",balance);
         if(balance-50< movement.getAmount()){
             throw new RemoteAccountBalanceNotEnoughException();
         }
