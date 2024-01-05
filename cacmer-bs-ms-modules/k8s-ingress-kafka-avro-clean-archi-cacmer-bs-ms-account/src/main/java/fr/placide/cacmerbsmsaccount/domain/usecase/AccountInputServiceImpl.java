@@ -113,7 +113,6 @@ public class AccountInputServiceImpl implements AccountInputService, RemoteCusto
     public List<Account> getAccountsByCustomer(String customerId) {
         return accountOutputService.getAccountsByCustomer(customerId);
     }
-
     @Override
     public List<Account> getAccountsByCustomersName(String customerLastname) throws RemoteCustomerApiException {
         List<Customer> customers = getRemoteCustomersByName(customerLastname);
