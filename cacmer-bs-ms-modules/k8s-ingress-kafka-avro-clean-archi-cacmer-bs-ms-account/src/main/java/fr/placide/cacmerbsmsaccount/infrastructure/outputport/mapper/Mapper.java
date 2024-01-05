@@ -72,4 +72,10 @@ public class Mapper {
                 .setCustomer(customer)
                 .build();
     }
+
+    public static CustomerModel map(Customer bean) {
+        CustomerModel model = CustomerModel.builder().build();
+        BeanUtils.copyProperties(bean, model);
+        return model;
+    }
 }

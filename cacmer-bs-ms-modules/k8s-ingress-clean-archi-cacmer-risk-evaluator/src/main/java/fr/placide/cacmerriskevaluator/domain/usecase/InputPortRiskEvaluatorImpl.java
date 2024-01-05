@@ -22,12 +22,10 @@ public final class InputPortRiskEvaluatorImpl implements InputPortRiskEvaluator 
         if(account==null){
             throw new RemoteAccountApiUnreachableException();
         }
-        log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!{}",account);
         Customer customer = remoteObjectsGetter.getRemoteCustomerById(account.getCustomerId());
         if(customer==null){
             throw new RemoteCustomerApiUnreachableException();
         }
-        log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!{}",customer);
         double balance = account.getBalance();
         if(movementSens.equals("sell")){
             balance+=movementAmount;
@@ -39,6 +37,7 @@ public final class InputPortRiskEvaluatorImpl implements InputPortRiskEvaluator 
                 balance+=account.getOverdraft()*1.3;
             }
         }
+
         return balance;
     }
 }

@@ -1,6 +1,5 @@
 package fr.placide.cacmerbsmsmovement.infrastructure.inputport.feignclients.proxies;
 
-import fr.placide.cacmerbsmsmovement.domain.beans.Account;
 import fr.placide.cacmerbsmsmovement.infrastructure.inputport.feignclients.fallbacks.AccountFallback;
 import fr.placide.cacmerbsmsmovement.infrastructure.inputport.feignclients.models.AccountDto;
 import fr.placide.cacmerbsmsmovement.infrastructure.inputport.feignclients.models.AccountModel;
@@ -22,5 +21,5 @@ public interface AccountServiceProxy {
     @GetMapping(value = "/accounts/customers/id/{id}")
     List<AccountModel> getRemoteAccountsByCustomerId(@PathVariable(name = "id") String id);
     @PutMapping(value = "/accounts/id/{id}")
-    Account updateAccountAfterOperation(@RequestBody AccountDto accountDto, @PathVariable(name = "id") String id);
+    AccountModel updateAccountAfterOperation(@RequestBody AccountDto accountDto, @PathVariable(name = "id") String id);
 }

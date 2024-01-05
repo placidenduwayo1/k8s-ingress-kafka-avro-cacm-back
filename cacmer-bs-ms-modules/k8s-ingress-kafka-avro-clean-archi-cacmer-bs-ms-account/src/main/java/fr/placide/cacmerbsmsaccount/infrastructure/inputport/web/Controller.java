@@ -4,7 +4,6 @@ import fr.placide.cacmerbsmsaccount.domain.beans.Account;
 import fr.placide.cacmerbsmsaccount.domain.exceptions.business_exc.*;
 import fr.placide.cacmerbsmsaccount.domain.inputport.AccountInputService;
 import fr.placide.cacmerbsmsaccount.infrastructure.outputport.models.AccountDto;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,15 +12,14 @@ import java.util.Map;
 @RestController
 @RequestMapping(value = "/bs-ms-account")
 public class Controller {
-    @Value("${welcome}")
-    private String [] welcome;
+    private static final String [] WELCOME ={"bs-ms-account-api","We wish you a warm welcome to account api service"};
     private final AccountInputService inputService;
     public Controller(AccountInputService inputService) {
         this.inputService = inputService;
     }
     @GetMapping(value = "")
     public Map<String, Object> getWelcome(){
-        return Map.of(welcome[0],welcome[1]);
+        return Map.of(WELCOME[0], WELCOME[1]);
     }
     @GetMapping(value = "/accounts/customers/name/{lastname}")
     public List<Account> getAccountsByCustomersName(@PathVariable(name = "lastname") String customerLastname) throws RemoteCustomerApiException {
@@ -45,7 +43,7 @@ public class Controller {
         return inputService.getAccountById(id);
     }
     @DeleteMapping(value = "/accounts/id/{id}")
-    public String delete(@PathVariable(name = "id") String id) throws AccountNotFoundException {
+    public String delete(@PathVariable(name = "id") String id) throws AccountNotFoundException, RemoteCustomerApiException {
         return inputService.deleteAccount(id);
     }
     @PutMapping(value = "/accounts/id/{id}")

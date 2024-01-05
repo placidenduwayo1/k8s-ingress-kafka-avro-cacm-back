@@ -6,12 +6,8 @@ import fr.placide.cacmerbsmsmovement.domain.beans.Customer;
 import fr.placide.cacmerbsmsmovement.domain.beans.Movement;
 import fr.placide.cacmerbsmsmovement.domain.exceptions.business_exc.*;
 import fr.placide.cacmerbsmsmovement.domain.inputport.MovementInputService;
-import fr.placide.cacmerbsmsmovement.domain.outputport.MovementOutputService;
-import fr.placide.cacmerbsmsmovement.domain.outputport.MovementProducerService;
-import fr.placide.cacmerbsmsmovement.domain.outputport.RemoteAccountService;
-import fr.placide.cacmerbsmsmovement.domain.outputport.RemoteCustomerService;
+import fr.placide.cacmerbsmsmovement.domain.outputport.*;
 import fr.placide.cacmerbsmsmovement.infrastructure.inputport.feignclients.models.AccountDto;
-import fr.placide.cacmerbsmsmovement.infrastructure.inputport.feignclients.proxies.RiskEvaluatorServiceProxy;
 import fr.placide.cacmerbsmsmovement.infrastructure.outputport.mapper.Mapper;
 import fr.placide.cacmerbsmsmovement.infrastructure.outputport.models.MovementDto;
 import lombok.extern.slf4j.Slf4j;
@@ -21,21 +17,23 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
 @Slf4j
 public class MovementInputServiceImpl implements MovementInputService {
     private final RemoteAccountService remoteAccountService;
     private final RemoteCustomerService remoteCustomerService;
     private final MovementProducerService producerService;
     private final MovementOutputService outputService;
-    private final RiskEvaluatorServiceProxy riskEvaluatorServiceProxy;
+    private final RemoteRiskEvaluatorService remoteRiskEvaluatorService;
+
     public MovementInputServiceImpl(RemoteAccountService remoteAccountService,
                                     RemoteCustomerService remoteCustomerService, MovementProducerService producerService,
-                                    MovementOutputService outputService, RiskEvaluatorServiceProxy riskEvaluatorServiceProxy) {
+                                    MovementOutputService outputService, RemoteRiskEvaluatorService remoteRiskEvaluatorService) {
         this.remoteAccountService = remoteAccountService;
         this.remoteCustomerService = remoteCustomerService;
         this.producerService = producerService;
         this.outputService = outputService;
-        this.riskEvaluatorServiceProxy = riskEvaluatorServiceProxy;
+        this.remoteRiskEvaluatorService = remoteRiskEvaluatorService;
     }
 
     private void validateMovementFields(MovementDto dto) throws MovementFieldsInvalidException, MovementSensInvalidException,
@@ -83,22 +81,29 @@ public class MovementInputServiceImpl implements MovementInputService {
         movement.setCreatedAt(Timestamp.from(Instant.now()).toString());
         setDependencies(movement);
         Account account = remoteAccountService.getRemoteAccountById(dto.getAccountId());
-        double balance = riskEvaluatorServiceProxy.getRemoteRiskEvaluation(account.getAccountId(),
+        double currentBalance = account.getBalance();
+        double evaluation = remoteRiskEvaluatorService.getRemoteRiskEvaluation(account.getAccountId(),
                 movement.getSens(), movement.getAmount());
-        log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! {}",balance);
-        if(balance==-1){
+        if (evaluation == -1_000_000_000) {
             throw new RemoteRiskEvaluatorServiceUnreachableException();
         }
-        if(Math.abs(balance)-50< movement.getAmount()){
+        if (Math.abs(evaluation) < movement.getAmount()) {
             throw new RemoteAccountBalanceNotEnoughException();
         }
         MovementAvro avro = Mapper.toAvro(movement);
         MovementAvro produced = producerService.produceKafkaEventCreateMovement(avro);
         outputService.createMvt(Mapper.map(produced));
-        account.setBalance(account.getBalance()- movement.getAmount());
-        AccountDto accountDto = Mapper.map(account);
-       remoteAccountService.updateAccountAfterOperation(accountDto, account.getAccountId());
-
+        if (movement.getSens().equals("sell")) {
+            account.setBalance(movement.getAmount());
+            AccountDto accountDto = Mapper.map(account);
+            remoteAccountService.updateAccountAfterOperation(accountDto, account.getAccountId());
+        } else if (movement.getSens().equals("buy")) {
+            account.setBalance(-currentBalance);
+            AccountDto accountDto = Mapper.map(account);
+            remoteAccountService.updateAccountAfterOperation(accountDto, account.getAccountId());
+            accountDto.setBalance(evaluation);
+            remoteAccountService.updateAccountAfterOperation(accountDto,account.getAccountId());
+        }
         return Mapper.map(produced);
     }
 
@@ -160,9 +165,9 @@ public class MovementInputServiceImpl implements MovementInputService {
     }
 
     @Override
-    public List<Movement> getOperationsByCustomerName(String lastname) throws  RemoteCustomerApiNotFoundException {
+    public List<Movement> getOperationsByCustomerName(String lastname) throws RemoteCustomerApiNotFoundException {
         List<Customer> customers = remoteCustomerService.getRemoteCustomersByName(lastname);
-        if(customers.isEmpty()){
+        if (customers.isEmpty()) {
             throw new RemoteCustomerApiNotFoundException();
         }
         return getMvt(customers);
@@ -170,13 +175,13 @@ public class MovementInputServiceImpl implements MovementInputService {
 
     private List<Movement> getMvt(List<Customer> customers) {
         List<Movement> movements = new ArrayList<>();
-        for(Customer customer: customers){
+        for (Customer customer : customers) {
             List<Account> accounts = remoteAccountService.getRemoteAccountsByCustomerId(customer.getCustomerId());
-            if(!accounts.isEmpty()){
+            if (!accounts.isEmpty()) {
                 accounts.forEach(account -> {
                     try {
                         List<Movement> subMvt = outputService.getMovementsByAccountId(account.getAccountId());
-                        if(!subMvt.isEmpty()){
+                        if (!subMvt.isEmpty()) {
                             subMvt.forEach(movement -> {
                                 try {
                                     setDependencies(movement);

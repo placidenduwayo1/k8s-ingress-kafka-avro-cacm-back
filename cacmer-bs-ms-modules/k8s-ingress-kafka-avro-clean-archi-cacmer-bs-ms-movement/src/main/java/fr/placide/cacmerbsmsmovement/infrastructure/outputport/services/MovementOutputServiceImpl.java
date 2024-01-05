@@ -126,7 +126,7 @@ public class MovementOutputServiceImpl implements MovementConsumerService, Movem
 
     @Override
     public void updateAccountAfterOperation(AccountDto accountDto, String accountId) {
-        accountServiceProxy.updateAccountAfterOperation(accountDto,accountId);
+       accountServiceProxy.updateAccountAfterOperation(accountDto,accountId);
     }
 
     @Override

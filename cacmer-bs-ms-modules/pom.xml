@@ -19,7 +19,7 @@
         <module>k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-customer</module>
         <module>k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-account</module>
         <module>k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-movement</module>
-        <module>k8s-ingress-kafka-avro-clean-archi-cacmer-risk-evaluator</module>
+        <module>k8s-ingress-clean-archi-cacmer-risk-evaluator</module>
     </modules>
 
 </project>

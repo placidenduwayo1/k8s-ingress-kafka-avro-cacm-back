@@ -6,7 +6,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@FeignClient(name = "k8s-ingress-cacmer-risk-evaluator-service", url = "http://localhost:8880",
+@FeignClient(name = "k8s-ingress-cacmer-risk-evaluator-service", url = "http://k8s-ingress-cacmer-risk-evaluator-service:8880",
 path = "/risk-evaluator", fallback = RiskEvaluatorFallback.class)
 @Qualifier(value = "riskevaluatorserviceproxy")
 public interface RiskEvaluatorServiceProxy {

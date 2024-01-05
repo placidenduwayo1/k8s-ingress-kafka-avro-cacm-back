@@ -7,6 +7,6 @@ import org.springframework.stereotype.Service;
 public class RiskEvaluatorFallback implements RiskEvaluatorServiceProxy {
     @Override
     public double getRemoteRiskEvaluation(String id, String movementSens, double movementAmount) {
-        return -1;
+        return -1_000_000_000;
     }
 }

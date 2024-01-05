@@ -12,7 +12,7 @@ public interface AccountInputService {
     List<Account> getAllAccounts();
     Account update(AccountDto dto, String accountId) throws AccountNotFoundException, RemoteCustomerApiException,
             AccountFieldsInvalidException, AccountTypeInvalidException, RemoteCustomerApiStatusInvalidException;
-    String deleteAccount(String id) throws AccountNotFoundException;
+    String deleteAccount(String id) throws AccountNotFoundException, RemoteCustomerApiException;
 
     Account getAccountById(String id) throws AccountNotFoundException;
     List<Account> getAccountsByCustomer(String customerId);

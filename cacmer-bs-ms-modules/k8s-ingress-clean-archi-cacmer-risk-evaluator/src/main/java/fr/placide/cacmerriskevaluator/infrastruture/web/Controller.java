@@ -1,9 +1,8 @@
-package fr.placide.cacmerriskevaluator.infrastruture.controller;
+package fr.placide.cacmerriskevaluator.infrastruture.web;
 
 import fr.placide.cacmerriskevaluator.domain.exceptions.RemoteAccountApiUnreachableException;
 import fr.placide.cacmerriskevaluator.domain.exceptions.RemoteCustomerApiUnreachableException;
 import fr.placide.cacmerriskevaluator.domain.usecase.InputPortRiskEvaluator;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,8 +14,10 @@ import java.util.Map;
 @RequestMapping(value = "/risk-evaluator")
 public class Controller {
     private final InputPortRiskEvaluator inputPortRiskEvaluator;
-    @Value("${message}")
-    private String[] message;
+    private static final String[] MESSAGE = {
+            "risk-eval-svc",
+            "welcome to service of risk evaluation of customers and their accounts against movements"
+    };
 
     public Controller(InputPortRiskEvaluator inputPortRiskEvaluator) {
         this.inputPortRiskEvaluator = inputPortRiskEvaluator;
@@ -25,7 +26,7 @@ public class Controller {
     @GetMapping(value = "")
 
     public Map<String, String> getWelcome() {
-        return Map.of(message[0], message[1]);
+        return Map.of(MESSAGE[0], MESSAGE[1]);
     }
 
     @GetMapping(value = "/{id}/{movementSens}/{movementAmount}")

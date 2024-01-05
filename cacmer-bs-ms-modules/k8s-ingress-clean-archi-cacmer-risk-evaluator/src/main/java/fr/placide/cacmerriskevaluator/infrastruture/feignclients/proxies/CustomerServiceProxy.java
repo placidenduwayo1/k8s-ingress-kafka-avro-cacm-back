@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 
-@FeignClient(name = "k8s-ingress-kafka-avro-cacmer-bs-ms-customer",url = "http://localhost:8882",
+@FeignClient(name = "k8s-ingress-kafka-avro-cacmer-bs-ms-customer",url = "http://k8s-ingress-kafka-avro-cacmer-bs-ms-customer:8882",
 path = "/bs-ms-customer", fallback = CustomerFallback.class)
 @Qualifier(value = "customerserviceproxy")
 public interface CustomerServiceProxy {

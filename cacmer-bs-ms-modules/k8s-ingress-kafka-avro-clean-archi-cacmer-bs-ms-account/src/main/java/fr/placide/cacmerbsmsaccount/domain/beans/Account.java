@@ -106,4 +106,16 @@ public class Account {
             return new Account(this);
         }
     }
+
+    @Override
+    public String toString() {
+        return "Account[" +
+                "accountId='" + accountId + '\'' +
+                ", type='" + type + '\'' +
+                ", balance=" + balance +
+                ", overdraft=" + overdraft +
+                ", customerId='" + customerId + '\'' +
+                ", customer=" + customer +
+                ']';
+    }
 }

@@ -46,11 +46,11 @@ public class BusinessExceptionHandler {
         return new ResponseEntity<>(ExceptionMsg.RISK_EVALUATION.getMsg(), HttpStatus.NOT_ACCEPTABLE);
     }
     @ExceptionHandler(value = RemoteCustomerStatusUnauthorizedException.class)
-    public String handleRemoteCustomerStatusUnauthorizedException(){
-        return ExceptionMsg.REMOTE_CUSTOMER_STATUS.getMsg();
+    public ResponseEntity<String> handleRemoteCustomerStatusUnauthorizedException(){
+        return new ResponseEntity<>(ExceptionMsg.REMOTE_CUSTOMER_STATUS.getMsg(), HttpStatus.UNAUTHORIZED);
     }
     @ExceptionHandler(value = RemoteRiskEvaluatorServiceUnreachableException.class)
-    public String handleRemoteRiskEvaluatorServiceUnreachableException(){
-        return ExceptionMsg.REMOTE_RISK_EVALUATOR.getMsg();
+    public ResponseEntity<String> handleRemoteRiskEvaluatorServiceUnreachableException(){
+        return new ResponseEntity<>(ExceptionMsg.REMOTE_RISK_EVALUATOR.getMsg(), HttpStatus.UNAUTHORIZED);
     }
 }

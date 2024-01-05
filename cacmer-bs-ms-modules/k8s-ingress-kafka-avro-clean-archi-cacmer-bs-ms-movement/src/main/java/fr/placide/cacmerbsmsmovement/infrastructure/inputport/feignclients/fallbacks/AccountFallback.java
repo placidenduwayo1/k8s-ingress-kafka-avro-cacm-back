@@ -1,6 +1,5 @@
 package fr.placide.cacmerbsmsmovement.infrastructure.inputport.feignclients.fallbacks;
 
-import fr.placide.cacmerbsmsmovement.domain.beans.Account;
 import fr.placide.cacmerbsmsmovement.infrastructure.inputport.feignclients.models.AccountDto;
 import fr.placide.cacmerbsmsmovement.infrastructure.inputport.feignclients.models.AccountModel;
 import fr.placide.cacmerbsmsmovement.infrastructure.inputport.feignclients.proxies.AccountServiceProxy;
@@ -22,7 +21,7 @@ public class AccountFallback implements AccountServiceProxy {
     }
 
     @Override
-    public Account updateAccountAfterOperation(AccountDto accountDto, String id) {
+    public AccountModel updateAccountAfterOperation(AccountDto accountDto, String id) {
         return null;
     }
 }

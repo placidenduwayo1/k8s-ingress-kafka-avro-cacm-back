@@ -288,6 +288,21 @@ services:
       kafka-broker-3:
         condition: service_healthy
     restart: on-failure
+    
+  k8s-ingress-cacmer-risk-evaluator-service:
+    image: placidenduwayo1/k8s-ingress-cacmer-risk-evaluator-service:1.0.0
+    container_name: k8s-ingress-cacmer-risk-evaluator-service
+    build:
+      context: ../cacmer-bs-ms-modules/k8s-ingress-clean-archi-cacmer-risk-evaluator
+      dockerfile: Dockerfile
+    ports:
+      - "8880:8880"
+    depends_on:
+      k8s-ingress-cacmer-ms-config-service:
+        condition: service_healthy
+    networks:
+      - my-network
+    restart: on-failure
 
 networks:
   my-network:

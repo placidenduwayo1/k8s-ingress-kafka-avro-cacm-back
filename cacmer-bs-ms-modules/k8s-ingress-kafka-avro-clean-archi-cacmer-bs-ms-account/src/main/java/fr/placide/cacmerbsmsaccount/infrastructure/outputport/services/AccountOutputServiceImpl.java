@@ -80,10 +80,9 @@ public class AccountOutputServiceImpl implements AccountConsumerService, Account
     }
 
     @Override
-    public void delete(Account account) {
-        AccountAvro avro = Mapper.toAvro(account);
-        Account consumed= consumeAccountCreateEvent(avro,"account-deleted");
-        accountRepo.deleteById(consumed.getAccountId());
+    public void delete(String accountId) throws AccountNotFoundException {
+        Account account = get(accountId);
+        accountRepo.deleteById(account.getAccountId());
     }
 
     @Override
