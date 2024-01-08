@@ -14,14 +14,14 @@ import java.util.Map;
 @RequestMapping(value = "/bs-ms-account")
 public class Controller {
     @Value("${welcome}")
-    private String [] welcome;
+    private static final Map<String, String> welcome = Map.of("bs-ms-account-api","We wish you a warm welcome to account api service");
     private final AccountInputService inputService;
     public Controller(AccountInputService inputService) {
         this.inputService = inputService;
     }
     @GetMapping(value = "")
-    public Map<String, Object> getWelcome(){
-        return Map.of(welcome[0], welcome[1]);
+    public Map<String, String> getWelcome(){
+        return welcome;
     }
     @GetMapping(value = "/accounts/customers/name/{lastname}")
     public List<Account> getAccountsByCustomersName(@PathVariable(name = "lastname") String customerLastname) throws RemoteCustomerApiException {
