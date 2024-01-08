@@ -199,3 +199,5 @@ tk8s-ingress-clean-archi-cacmer-risk-evaluator/src/main/java/fr/placide/cacmerri
 •k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-account/src/main/java/fr/placide/cacmerbsmsaccount/infrastructure/outputport/models/AccountModel.java,e/0/e08b57755596efadfda8d1c0f1bb168dea15bb18
 ¬
 |k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-account/src/main/java/fr/placide/cacmerbsmsaccount/domain/avro/Customer.java,5/8/5899215e88604d53a5d4cfd72b7849fad7918fdf
+Ä
+“k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-account/src/test/java/fr/placide/cacmerbsmsaccount/infrastructure/inputport/web/ControllerTest.java,c/6/c6a867abe877852d4e381fc281f73fe312f33a56
