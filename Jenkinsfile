@@ -15,7 +15,7 @@ pipeline{
             post {
                 success {
                    dir('./cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-account/'){
-                    archiveArtifacts '**/targets/.jar'
+                    archiveArtifacts '**/target/.jar'
                 }
                 }
             }
@@ -27,7 +27,6 @@ pipeline{
                     sh 'mvt test'
                 }
             }
-
         }
     }
 }

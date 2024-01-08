@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="70dc675c-105e-4a8f-b504-2393b46cbb7d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-account/src/test/java/fr/placide/cacmerbsmsaccount/infrastructure/inputport/web/ControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cacmer-bs-ms-modules/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cacmer-bs-ms-modules/.idea/sonarlint/securityhotspotstore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/.idea/sonarlint/securityhotspotstore/index.pb" afterDir="false" />
-    </list>
+    <list default="true" id="70dc675c-105e-4a8f-b504-2393b46cbb7d" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
