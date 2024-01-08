@@ -52,4 +52,32 @@ class ControllerTest {
             Assertions.assertEquals(accounts.size(),accounts1.size());
         });
     }
+
+    @Test
+    void getAccountsByCustomersName() {
+    }
+
+    @Test
+    void getAccountByCustomerId() {
+    }
+
+    @Test
+    void create() {
+    }
+
+    @Test
+    void getAll() {
+    }
+
+    @Test
+    void get() {
+    }
+
+    @Test
+    void delete() {
+    }
+
+    @Test
+    void update() {
+    }
 }
