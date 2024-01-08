@@ -6,8 +6,10 @@ pipeline{
     }
     stages {
         stage ('git-repo-checkout') {
-            checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/placidenduwayo1/k8s-ingress-kafka-avro-aepc-back.git']])
-             dir('../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-account'){
+            checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/placidenduwayo1/k8s-ingress-kafka-avro-cacmer-back.git']])
+        }
+        stage('build'){
+           dir('../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-account'){
                 sh 'mvn clean install'
            }
         }

@@ -86,6 +86,10 @@ all exposed endpoints by business microservices are  through the gateway :**http
     "account-id": string
 }
 ```
-**note:** all necessary restrictions are applied, remote account and customer service apis must be reachable
+**note:**:  
+- all necessary restrictions are applied, r
+- remote account and customer service apis must be reachable
+- risk-evaluator service evaluation must permit movement to pass if not business exception is raised
+        
 
 
