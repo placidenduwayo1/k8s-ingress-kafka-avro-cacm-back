@@ -124,6 +124,7 @@
             <artifactId>avro</artifactId>
             <version>${avro.version}</version>
         </dependency>
+
     </dependencies>
 
     <dependencyManagement>

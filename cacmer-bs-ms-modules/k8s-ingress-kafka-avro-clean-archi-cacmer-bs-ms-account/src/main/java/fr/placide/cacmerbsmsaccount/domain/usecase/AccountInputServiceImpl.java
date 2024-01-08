@@ -60,9 +60,9 @@ public class AccountInputServiceImpl implements AccountInputService, RemoteCusto
         account.setAccountId(UUID.randomUUID().toString());
         setDependency(account);
         AccountAvro avro = Mapper.toAvro(account);
-        accountProducerService.produceKafkaEventCreateAccount(avro);
-        accountOutputService.create(Mapper.map(avro));
-        return Mapper.map(avro);
+        AccountAvro avro1 = accountProducerService.produceKafkaEventCreateAccount(avro);
+        accountOutputService.create(Mapper.map(avro1));
+        return Mapper.map(avro1);
     }
 
     @Override

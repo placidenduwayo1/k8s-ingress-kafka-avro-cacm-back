@@ -87,7 +87,7 @@ public class MovementInputServiceImpl implements MovementInputService {
         if (evaluation == -1_000_000_000) {
             throw new RemoteRiskEvaluatorServiceUnreachableException();
         }
-        if (Math.abs(evaluation) < movement.getAmount()) {
+        if (evaluation < -account.getOverdraft()) {
             throw new RemoteAccountBalanceNotEnoughException();
         }
         MovementAvro avro = Mapper.toAvro(movement);

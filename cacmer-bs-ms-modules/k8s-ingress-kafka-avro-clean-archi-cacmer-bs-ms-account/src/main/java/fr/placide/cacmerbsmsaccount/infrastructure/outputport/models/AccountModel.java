@@ -8,7 +8,7 @@ import jakarta.persistence.Transient;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
-@Builder @Getter @Setter @NoArgsConstructor @AllArgsConstructor
+@Builder @Getter @Setter @NoArgsConstructor @AllArgsConstructor@ToString
 @Entity @Table(name = "accounts")
 public class AccountModel {
     @Id

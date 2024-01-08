@@ -15,6 +15,7 @@
         <option value="$PROJECT_DIR$/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-customer/pom.xml" />
         <option value="$PROJECT_DIR$/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-account/pom.xml" />
         <option value="$PROJECT_DIR$/k8s-ingress-kafka-avro-clean-archi-cacmer-risk-evauator/pom.xml" />
+        <option value="$PROJECT_DIR$/k8s-ingress-clean-archi-cacmer-risk-evaluator/pom.xml" />
       </list>
     </option>
     <option name="workspaceImportForciblyTurnedOn" value="true" />

@@ -185,3 +185,17 @@ S
 uk8s-ingress-clean-archi-cacmer-risk-evaluator/src/main/java/fr/placide/cacmerriskevaluator/domain/beans/Customer.java,5/3/534d4fd5b6a152124f30f437ac4468a781143eca
 ¤
 tk8s-ingress-clean-archi-cacmer-risk-evaluator/src/main/java/fr/placide/cacmerriskevaluator/domain/beans/Account.java,4/9/4922def55a4c5b0e0f208f1e58a88cc421d37495
+Ú
+©k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-account/src/test/java/fr/placide/cacmerbsmsaccount/infrastructure/outputport/services/AccountProducerServiceImplTest.java,6/c/6cf17901f28f8071a7c75d89df671486f5b57597
+Ò
+¡k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-account/src/main/java/fr/placide/cacmerbsmsaccount/K8sIngressKafkaAvroCleanArchiCacmerBsMsAccountApplication.java,c/7/c7ab54264c3fd83cc7db3f395138e60f1e54efe0
+Ø
+§k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-account/src/test/java/fr/placide/cacmerbsmsaccount/infrastructure/outputport/services/AccountOutputServiceImplTest.java,3/b/3b0d1f6ce5ffce9dd5af55764d6ae7cbd3672604
+³
+‚k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-account/src/main/java/fr/placide/cacmerbsmsaccount/domain/topics/TopicsParams.java,a/3/a3407ba6589fe24a0e9013768f47a15c89a3de46
+º
+‰k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-account/src/main/java/fr/placide/cacmerbsmsaccount/infrastructure/config/KafkaTopics.java,5/0/50225e74065553ea0356338a6fb04dce0372fe70
+Æ
+•k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-account/src/main/java/fr/placide/cacmerbsmsaccount/infrastructure/outputport/models/AccountModel.java,e/0/e08b57755596efadfda8d1c0f1bb168dea15bb18
+¬
+|k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-account/src/main/java/fr/placide/cacmerbsmsaccount/domain/avro/Customer.java,5/8/5899215e88604d53a5d4cfd72b7849fad7918fdf

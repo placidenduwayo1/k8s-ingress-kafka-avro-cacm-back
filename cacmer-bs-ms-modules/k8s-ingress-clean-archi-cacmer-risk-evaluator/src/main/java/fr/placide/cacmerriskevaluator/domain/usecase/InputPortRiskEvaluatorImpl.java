@@ -19,25 +19,19 @@ public final class InputPortRiskEvaluatorImpl implements InputPortRiskEvaluator 
     public double evaluate(String accountId, String movementSens, double movementAmount) throws RemoteAccountApiUnreachableException,
             RemoteCustomerApiUnreachableException {
         Account account = remoteObjectsGetter.getRemoteAccountById(accountId);
-        if(account==null){
+        if (account == null) {
             throw new RemoteAccountApiUnreachableException();
         }
         Customer customer = remoteObjectsGetter.getRemoteCustomerById(account.getCustomerId());
-        if(customer==null){
+        if (customer == null) {
             throw new RemoteCustomerApiUnreachableException();
         }
         double balance = account.getBalance();
-        if(movementSens.equals("sell")){
-            balance+=movementAmount;
+        if (movementSens.equals("sell")) {
+            balance += movementAmount;
+        } else if (movementSens.equals("buy") && account.getBalance() >= movementAmount) {
+            balance -= movementAmount;
         }
-        else if (movementSens.equals("buy")){
-            if(customer.getRisk().equals("low")){
-                balance-=account.getOverdraft()*1.1;
-            } else if (customer.getRisk().equals("high")) {
-                balance+=account.getOverdraft()*1.3;
-            }
-        }
-
         return balance;
     }
 }

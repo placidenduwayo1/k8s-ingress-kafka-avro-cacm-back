@@ -23,9 +23,6 @@ public class AccountValidationTools {
         }
         return exists;
     }
-    public static boolean isValidBalance(double balance){
-        return balance>=45;
-    }
     public static boolean isValidOverDraft(double overdraft){
         return overdraft>=0;
     }
