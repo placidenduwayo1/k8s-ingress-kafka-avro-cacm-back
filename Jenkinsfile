@@ -5,7 +5,7 @@ pipeline{
         jdk 'Java-17'
     }
     stages {
-        stage ('git-repo-checkout') {
+        stage('git-repo-checkout') {
             checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/placidenduwayo1/k8s-ingress-kafka-avro-cacmer-back.git']])
             dir('../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-account/'){
                 sh 'mvn clean install'
