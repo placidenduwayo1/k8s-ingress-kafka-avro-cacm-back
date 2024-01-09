@@ -49,8 +49,8 @@ pipeline{
         stage('docker-build'){
             steps {
                 script {
-                    sh 'docker compose -f **/cacm-docker-compose.yml down'
-                    sh 'docker compose -f **/cacm-docker-compose.yml build'
+                    sh 'docker compose -f ./cacmer-bs-ms-modules/cacm-docker-compose.yml down'
+                    sh 'docker compose -f ./cacmer-bs-ms-modules/cacm-docker-compose.yml build'
                     sh 'docker system prune -f'
                 }
             }
