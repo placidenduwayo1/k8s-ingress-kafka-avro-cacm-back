@@ -7,7 +7,7 @@ import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 @Builder@Getter@Setter
-@AllArgsConstructor@NoArgsConstructor
+@AllArgsConstructor@NoArgsConstructor@ToString
 @Entity@Table(name = "addresses")
 public class AddressModel {
     @Id

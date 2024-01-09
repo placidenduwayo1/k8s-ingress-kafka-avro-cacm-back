@@ -225,3 +225,13 @@ zk8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-address/src/main/java/fr/placid
 {k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-address/src/main/java/fr/placide/cacmbsmsaddress/domain/beans/Customer.java,6/1/61a05a45239939f17957975a66786f56604d5565
 Ö
 ¥k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-address/src/main/java/fr/placide/cacmbsmsaddress/infrastructure/inputport/feignclients/fallback/CustomerFallback.java,5/9/5926c80764ecd782ffec2e17cd55bbae593a990b
+É
+˜k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-address/src/test/java/fr/placide/cacmbsmsaddress/K8sIngressKafkaAvroCacmBsMsAddressApplicationTests.java,b/7/b799fbd2e5331c16ea8796c6c7d1c9c65b2fd935
+Ô
+£k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-address/src/main/java/fr/placide/cacmbsmsaddress/infrastructure/outputport/services/AddressProducerServiceImpl.java,e/a/ea938f15b79141b328232e6b899e68fda62c189a
+Ø
+§k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-address/src/test/java/fr/placide/cacmbsmsaddress/infrastructure/outputport/services/AddressProducerServiceImplTest.java,5/f/5f21f17dd7708f268bc9e38a0344f1a2c0ec89d7
+Ö
+¥k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-address/src/test/java/fr/placide/cacmbsmsaddress/infrastructure/outputport/services/AddressOutputServiceImplTest.java,8/7/8783b358579136553167d3805fb6598b69313d3f
+Ä
+“k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-address/src/main/java/fr/placide/cacmbsmsaddress/infrastructure/outputport/models/AddressModel.java,4/d/4d73352d05f9c321fab970f4ca6999009b1d714d
