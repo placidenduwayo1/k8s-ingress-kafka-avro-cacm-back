@@ -4,11 +4,9 @@ import fr.placide.cacmerriskevaluator.domain.beans.Account;
 import fr.placide.cacmerriskevaluator.domain.beans.Customer;
 import fr.placide.cacmerriskevaluator.domain.exceptions.RemoteAccountApiUnreachableException;
 import fr.placide.cacmerriskevaluator.domain.exceptions.RemoteCustomerApiUnreachableException;
+import fr.placide.cacmerriskevaluator.domain.inputport.InputPortRiskEvaluator;
 import fr.placide.cacmerriskevaluator.domain.outputport.RemoteObjectsGetter;
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
-public final class InputPortRiskEvaluatorImpl implements InputPortRiskEvaluator {
+public class InputPortRiskEvaluatorImpl implements InputPortRiskEvaluator {
     private final RemoteObjectsGetter remoteObjectsGetter;
 
     public InputPortRiskEvaluatorImpl(RemoteObjectsGetter remoteObjectsGetter) {

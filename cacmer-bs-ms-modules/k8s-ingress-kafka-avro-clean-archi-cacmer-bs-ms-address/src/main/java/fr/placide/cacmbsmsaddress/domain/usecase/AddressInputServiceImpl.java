@@ -80,7 +80,7 @@ public class AddressInputServiceImpl implements AddressInputService {
                 .city(payload.getCity())
                 .country(payload.getCountry())
                 .build();
-        AddressAvro avro = addressProducerService.produceKafkaEventCreateAddress(Mapper.toAvro(toUpdate));
+        AddressAvro avro = addressProducerService.produceKafkaEventUpdateAddress(Mapper.toAvro(toUpdate));
         addressOutputService.update(Mapper.map(avro));
         return Mapper.map(avro);
     }
