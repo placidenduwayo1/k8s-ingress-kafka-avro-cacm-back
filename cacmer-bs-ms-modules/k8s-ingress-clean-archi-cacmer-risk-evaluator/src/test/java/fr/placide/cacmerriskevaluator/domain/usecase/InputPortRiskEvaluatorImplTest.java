@@ -59,4 +59,39 @@ class InputPortRiskEvaluatorImplTest {
             Assertions.assertEquals(account.getBalance()-50,balance1);
         });
     }
+    @Test
+    void testEvaluateException1(){
+        //PREPARE
+        String accountId="id-account";
+        String mvtSens="buy";
+        double mvtAmount=20.0;
+        //EXECUTE
+        Mockito.when(remoteObjectsGetter.getRemoteAccountById(accountId)).thenReturn(null);
+        RemoteAccountApiUnreachableException exception = Assertions.assertThrows(
+                RemoteAccountApiUnreachableException.class,()-> underTest.evaluate(accountId,mvtSens,mvtAmount)
+        );
+        //VERIFY
+        Assertions.assertAll("",()->{
+            Mockito.verify(remoteObjectsGetter, Mockito.atLeast(1)).getRemoteAccountById(accountId);
+            Assertions.assertNotNull(exception);
+        });
+    }
+    @Test
+    void testEvaluateException2(){
+        //PREPARE
+        String accountId="accountId";
+        String mvtSens="buy";
+        double mvtAmount=20.0;
+        //EXECUTE
+        Mockito.when(remoteObjectsGetter.getRemoteAccountById(accountId)).thenReturn(account);
+        Mockito.when(remoteObjectsGetter.getRemoteCustomerById(account.getCustomerId())).thenReturn(null);
+        RemoteCustomerApiUnreachableException exception = Assertions.assertThrows(
+                RemoteCustomerApiUnreachableException.class,()->underTest.evaluate(accountId,mvtSens,mvtAmount)
+        );
+        //VERIFY
+        Assertions.assertAll("",()->{
+            Mockito.verify(remoteObjectsGetter, Mockito.atLeast(1)).getRemoteAccountById(accountId);
+            Assertions.assertNotNull(exception);
+        });
+    }
 }

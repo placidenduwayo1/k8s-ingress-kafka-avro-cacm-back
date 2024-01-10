@@ -1,6 +1,5 @@
 package fr.placide.cacmerbsmsaccount.infrastructure.inputport.feignclients.proxies;
 
-import fr.placide.cacmerbsmsaccount.domain.beans.Customer;
 import fr.placide.cacmerbsmsaccount.domain.exceptions.business_exc.RemoteCustomerApiException;
 import fr.placide.cacmerbsmsaccount.infrastructure.inputport.feignclients.fallbacks.CustomerFallback;
 import fr.placide.cacmerbsmsaccount.infrastructure.inputport.feignclients.models.CustomerModel;

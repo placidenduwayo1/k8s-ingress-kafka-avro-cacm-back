@@ -19,6 +19,7 @@ import org.mockito.MockitoAnnotations;
 
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.util.Collections;
 import java.util.List;
 
 class AccountInputServiceImplTest {
@@ -208,6 +209,21 @@ class AccountInputServiceImplTest {
             Assertions.assertNotNull(expected);
             Mockito.verify(remoteCustomerOutputService, Mockito.atLeast(1)).getCustomersByName(customerLastname);
         });
-
+    }
+    @Test
+    void testGetRemoteCustomerByNameException(){
+        //PREPARE
+        String name="placide";
+        List<Customer> emptyList = Collections.emptyList();
+        //EXECUTE
+        Mockito.when(remoteCustomerOutputService.getCustomersByName(name)).thenReturn(emptyList);
+        RemoteCustomerApiException exception = Assertions.assertThrows(RemoteCustomerApiException.class,
+                ()->underTest.getRemoteCustomersByName(name));
+        //VERIFY
+        Assertions.assertAll("",()->{
+            Mockito.verify(remoteCustomerOutputService, Mockito.atLeast(1))
+                    .getCustomersByName(name);
+            Assertions.assertNotNull(exception);
+        });
     }
 }
