@@ -137,7 +137,6 @@ public class CustomerOutputServiceImpl implements CustomerOutputService, RemoteA
                 .map(Mapper::map)
                 .toList();
     }
-
     private Customer map(CustomerAvro avro) {
         return Mapper.map(avro);
     }
