@@ -68,7 +68,7 @@ pipeline{
             steps {
                 echo 'Starting to publish docker images into docker registry'
                 script {
-                    withDockerRegistry(credentialsId: 'dockerhub-credentials', url: '') {
+                    withDockerRegistry([credentialsId: 'dockerhub-credentials', url: '' ]) {
                         sh 'docker compose -f ./docker-images-deploy/cacm-docker-compose.yaml push'
                     }
                 }
