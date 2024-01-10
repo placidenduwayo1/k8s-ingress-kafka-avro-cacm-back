@@ -5,13 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="70dc675c-105e-4a8f-b504-2393b46cbb7d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-address/src/test/java/fr/placide/cacmbsmsaddress/infrastructure/outputport/services/AddressOutputServiceImplTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-address/src/test/java/fr/placide/cacmbsmsaddress/infrastructure/outputport/services/AddressProducerServiceImplTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-address/src/test/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-customer/src/test/java/fr/placide/cacmbsmscustomer/infrastructure/outputport/services/CustomerOutputServiceImplTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-customer/src/test/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../cacmer-bs-ms-modules/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../cacmer-bs-ms-modules/.idea/sonarlint/securityhotspotstore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/.idea/sonarlint/securityhotspotstore/index.pb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-address/src/main/java/fr/placide/cacmbsmsaddress/infrastructure/outputport/models/AddressModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-address/src/main/java/fr/placide/cacmbsmsaddress/infrastructure/outputport/models/AddressModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-address/src/test/java/fr/placide/cacmbsmsaddress/K8sIngressKafkaAvroCacmBsMsAddressApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-address/src/test/java/fr/placide/cacmbsmsaddress/K8sIngressKafkaAvroCacmBsMsAddressApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-customer/src/main/java/fr/placide/cacmbsmscustomer/domain/beans/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-customer/src/main/java/fr/placide/cacmbsmscustomer/domain/beans/Account.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-customer/src/main/java/fr/placide/cacmbsmscustomer/infrastructure/outputport/services/CustomerOutputServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-customer/src/main/java/fr/placide/cacmbsmscustomer/infrastructure/outputport/services/CustomerOutputServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-customer/src/test/java/fr/placide/cacmbsmscustomer/K8sIngressKafkaAvroCleanArchiCacmBsMsCustomerApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-customer/src/test/java/fr/placide/cacmbsmscustomer/K8sIngressKafkaAvroCleanArchiCacmBsMsCustomerApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-customer/src/test/java/fr/placide/cacmbsmscustomer/domain/usecase/CustomerInputServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-customer/src/test/java/fr/placide/cacmbsmscustomer/domain/usecase/CustomerInputServiceImplTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -63,6 +64,7 @@
       <workItem from="1704698084935" duration="1209000" />
       <workItem from="1704722053295" duration="599000" />
       <workItem from="1704785234046" duration="1197000" />
+      <workItem from="1704870256693" duration="1280000" />
     </task>
     <servers />
   </component>
