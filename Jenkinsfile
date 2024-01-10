@@ -20,6 +20,12 @@ pipeline{
                 dir('./cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-customer/'){
                     sh 'mvn clean install'
                 }
+                dir('./cacmer-utils-ms-modules/k8s-ingress-cacmer-gateway-service/'){
+                    sh 'mvn clean install'
+                }
+                dir('./cacmer-utils-ms-modules/k8s-ingress-cacmer-ms-config-service/'){
+                    sh 'mvn clean install'
+                }
             }
             post {
                 success {
@@ -34,6 +40,12 @@ pipeline{
                     }
                     dir('./cacmer-bs-ms-modules/k8s-ingress-kafka-avro-clean-archi-cacmer-bs-ms-customer/'){
                         archiveArtifacts '**/target/*.jar'
+                    }
+                    dir('./cacmer-utils-ms-modules/k8s-ingress-cacmer-gateway-service/'){
+                         archiveArtifacts '**/target/*.jar'
+                    }
+                    dir('./cacmer-utils-ms-modules/k8s-ingress-cacmer-ms-config-service/'){
+                      archiveArtifacts '**/target/*.jar'
                     }
                 }
             }
