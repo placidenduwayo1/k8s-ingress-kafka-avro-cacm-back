@@ -192,7 +192,6 @@ class CustomerInputServiceImplTest {
             Mockito.verify(customerOutputService, Mockito.times(1)).getCustomer(CUSTOMER_ID);
         });
     }
-
     @Test
     void getCustomersByAddress() {
         //PREPARE
@@ -206,7 +205,6 @@ class CustomerInputServiceImplTest {
             Mockito.verify(customerOutputService, Mockito.times(1)).getCustomersByAddress(ADDRESS_ID);
         });
     }
-
     @Test
     void getCustomersByCity() throws RemoteAddressApiException {
         //PREPARE
