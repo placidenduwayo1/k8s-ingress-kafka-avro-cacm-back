@@ -264,4 +264,16 @@ class CustomerInputServiceImplTest {
             Assertions.assertNotNull(exception);
         });
     }
+    @Test
+    void testRemoteAddressApiException(){
+        //EXECUTE
+        Mockito.when(remoteAddressOutputService.getRemoteAddressById(ADDRESS_ID)).thenReturn(null);
+        RemoteAddressApiException exception = Assertions.assertThrows(
+                RemoteAddressApiException.class,()->underTest.getRemoteAddressById(ADDRESS_ID));
+        //VERIFY
+        Assertions.assertAll("",()->{
+            Mockito.verify(remoteAddressOutputService, Mockito.atLeast(1)).getRemoteAddressById(ADDRESS_ID);
+            Assertions.assertNotNull(exception);
+        });
+    }
 }

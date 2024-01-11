@@ -19,7 +19,7 @@ public class BusinessExceptionsHandler {
     }
     @ExceptionHandler(value = CustomerNotFoundException.class)
     public ResponseEntity<String> handleCustomerNotFoundException(){
-        return new ResponseEntity<>(ExceptionMsg.CUSTOMER_NOT_FOUND.getMsg(), HttpStatus.NOT_ACCEPTABLE);
+        return new ResponseEntity<>(ExceptionMsg.CUSTOMER_NOT_FOUND.getMsg(), HttpStatus.NOT_FOUND);
     }
     @ExceptionHandler(value = CustomerRiskInvalidException.class)
     public ResponseEntity<String> handleCustomerRiskInvalidException(){
